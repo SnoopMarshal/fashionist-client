@@ -63,11 +63,11 @@ export default function DrawerNav() {
     </div>
   );
   return (
-    <div className="fixed w-full lt-header-mobile top-0 flex justify-between items-center bg-transparent p-4 shadow-lg">
+    <div className="fixed w-full lt-header-mobile top-0 flex justify-between items-center bg-transparent p-4 shadow-lg z-10">
       <div className="flex items-center" onClick={toggleDrawer(true)}>
-        <Icon className="lt-text-primary">menu</Icon>
+        <Icon className="lt-text-accent">menu</Icon>
         <div className="pl-2">
-          <span className="font-bold lt-text-primary">Little Tags</span>
+          <span className="font-bold lt-text-accent">Little Tags</span>
         </div>
       </div>
       <div className="flex items-center">

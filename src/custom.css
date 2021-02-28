@@ -1,20 +1,29 @@
-.lt-colorPrimary-bg {
+.lt-bg-primary {
   background-color: #e40017 !important;
 }
-.lt-colorAccent-bg {
-  background-color: #51c2d5;
+.lt-bg-accent {
+  background-color: #30475e !important;
 }
-.lt-colorGrey-bg {
+.lt-bg-grey {
   background-color: #f2f5f5;
 }
 .lt-text-primary {
   color: #e40017 !important;
 }
 .lt-text-accent {
-  color: #51c2d5;
+  color: #30475e;
 }
 .lt-text-grey {
   color: #f2f5f5;
+}
+.lt-border-primary {
+  border-bottom: #e40017 solid !important;
+}
+.lt-border-accent {
+  border-bottom: #51c2d5 solid !important;
+}
+.lt-border-grey {
+  border-bottom: #f2f5f5 solid !important;
 }
 .lt-header {
   /* box-shadow: 20px 20px 20px 20px rgba( 0, 0, 0, 0.5); */
@@ -46,28 +55,33 @@
   width: 42px !important;
   font-size: 42px !important;
 }
-@media only screen and (max-width: 2500px) {
-  .lt-landing-slider {
-    height: 720px;
+@media only screen and (max-width: 2536px) {
+  .carousel-container {
+    height: 520px;
   }
 }
-@media only screen and (max-width: 1170px) {
-  .lt-landing-slider {
-    height: 640px;
+@media only screen and (max-width: 1536px) {
+  .carousel-container {
+    height: 520px;
   }
 }
-@media only screen and (max-width: 970px) {
-  .lt-landing-slider {
-    height: 590px;
+@media only screen and (max-width: 1280px) {
+  .carousel-container {
+    height: 460px;
+  }
+}
+@media only screen and (max-width: 1024px) {
+  .carousel-container {
+    height: 380px;
+  }
+}
+@media only screen and (max-width: 768px) {
+  .carousel-container {
+    height: 340px;
   }
 }
 @media only screen and (max-width: 640px) {
-  .lt-landing-slider {
-    height: 337px;
-  }
-}
-@media only screen and (max-width: 433px) {
-  .lt-landing-slider {
-    height: 250px;
+  .carousel-container {
+    height: 280px;
   }
 }

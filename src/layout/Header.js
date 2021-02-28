@@ -14,7 +14,7 @@ export default function Header() {
       {isMatch ? (
         <DrawerNav />
       ) : (
-        <div className="fixed w-full lt-header top-0 flex justify-between items-center bg-transparent shadow-xl">
+        <div className="fixed w-full lt-header top-0 flex justify-between items-center bg-transparent shadow-xl z-10">
           <div className="flex items-center h-16 w-24">
             <img src={logo} alt="logo" />
           </div>
