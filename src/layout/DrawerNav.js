@@ -4,14 +4,20 @@ import ListItem from "@material-ui/core/ListItem";
 import List from "@material-ui/core/List";
 import logo from "./../assets/logo/lt-logo.png";
 import Icon from "@material-ui/core/Icon";
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-  Link,
-  NavLink,
-} from "react-router-dom";
+import Menu from "@material-ui/core/Menu";
+import MenuItem from "@material-ui/core/MenuItem";
+
+import { NavLink } from "react-router-dom";
 export default function DrawerNav() {
+  const [anchorEl, setAnchorEl] = React.useState(null);
+
+  const handleClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
   const [state, setState] = React.useState(false);
   const toggleDrawer = (open) => (event) => {
     setState(open);
@@ -71,9 +77,27 @@ export default function DrawerNav() {
         </div>
       </div>
       <div className="flex items-center">
-        <div className="flex items-center justify-end">
-          <Icon className="lt-text-accent lt-icon-lg">account_circle</Icon>
+        <div className="flex items-center justify-around ml-4 w-12 h-12">
+          <Icon className="lt-text-accent lt-icon-base">shopping_cart</Icon>
         </div>
+        <div
+          className="flex items-center justify-around w-12 h-12"
+          onClick={handleClick}
+        >
+          <Icon className="lt-text-accent lt-icon-md">account_circle</Icon>
+        </div>
+        <Menu
+          id="simple-menu"
+          anchorEl={anchorEl}
+          keepMounted
+          open={Boolean(anchorEl)}
+          onClose={handleClose}
+          anchorOrigin={{ vertical: "bottom", horizontal: "right" }}
+        >
+          <MenuItem onClick={handleClose}>Profile</MenuItem>
+          <MenuItem onClick={handleClose}>My account</MenuItem>
+          <MenuItem onClick={handleClose}>Logout</MenuItem>
+        </Menu>
       </div>
       <Drawer
         className=""

@@ -1,14 +1,22 @@
 import React from "react";
 import logo from "./../assets/logo/lt-logo.png";
 import Icon from "@material-ui/core/Icon";
-import {
-  NavLink
-} from "react-router-dom";
+import { NavLink } from "react-router-dom";
+import Menu from "@material-ui/core/Menu";
+import MenuItem from "@material-ui/core/MenuItem";
 import { useMediaQuery, useTheme } from "@material-ui/core";
 import DrawerNav from "./DrawerNav";
 export default function Header() {
+  const [anchorEl, setAnchorEl] = React.useState(null);
   const theme = useTheme();
   const isMatch = useMediaQuery(theme.breakpoints.down("md"));
+  const handleClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
   return (
     <>
       {isMatch ? (
@@ -54,8 +62,26 @@ export default function Header() {
               </NavLink>
             </div>
             <div className="flex items-center justify-around ml-4 w-16 h-16">
+              <Icon className="lt-text-accent lt-icon-base">shopping_cart</Icon>
+            </div>
+            <div
+              className="flex items-center justify-around w-16 h-16"
+              onClick={handleClick}
+            >
               <Icon className="lt-text-accent lt-icon-lg">account_circle</Icon>
             </div>
+            <Menu
+              id="simple-menu"
+              anchorEl={anchorEl}
+              keepMounted
+              open={Boolean(anchorEl)}
+              onClose={handleClose}
+              anchorOrigin={{ vertical: "bottom", horizontal: "right" }}
+            >
+              <MenuItem onClick={handleClose}>Profile</MenuItem>
+              <MenuItem onClick={handleClose}>My account</MenuItem>
+              <MenuItem onClick={handleClose}>Logout</MenuItem>
+            </Menu>
           </div>
         </div>
       )}
