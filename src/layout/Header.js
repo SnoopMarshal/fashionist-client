@@ -6,6 +6,7 @@ import Menu from "@material-ui/core/Menu";
 import MenuItem from "@material-ui/core/MenuItem";
 import { useMediaQuery, useTheme } from "@material-ui/core";
 import DrawerNav from "./DrawerNav";
+import { FormattedMessage } from "react-intl";
 export default function Header() {
   const [anchorEl, setAnchorEl] = React.useState(null);
   const theme = useTheme();
@@ -34,7 +35,7 @@ export default function Header() {
                 className="font-semibold px-4"
                 activeClassName="border-b-2 border-red-600 lt-text-primary"
               >
-                Home
+                <FormattedMessage id="home" />
               </NavLink>
               <NavLink
                 to="/shop"
@@ -42,7 +43,15 @@ export default function Header() {
                 className="font-semibold px-4"
                 activeClassName="border-b-2 border-red-600 lt-text-primary"
               >
-                Shop
+                <FormattedMessage id="shop" />
+              </NavLink>
+              <NavLink
+                to="/category"
+                exact
+                className="font-semibold px-4"
+                activeClassName="border-b-2 border-red-600 lt-text-primary"
+              >
+                <FormattedMessage id="category" />
               </NavLink>
               <NavLink
                 to="/sale"
@@ -50,15 +59,7 @@ export default function Header() {
                 className="font-semibold px-4"
                 activeClassName="border-b-2 border-red-600 lt-text-primary"
               >
-                Sale
-              </NavLink>
-              <NavLink
-                to="/about"
-                exact
-                className="font-semibold px-4"
-                activeClassName="border-b-2 border-red-600 lt-text-primary"
-              >
-                About
+                <FormattedMessage id="sale" />
               </NavLink>
             </div>
             <div className="flex items-center justify-around ml-4 w-16 h-16">
