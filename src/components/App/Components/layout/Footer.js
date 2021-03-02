@@ -29,7 +29,9 @@ export default function Footer() {
         </div>
         {/* <div className="flex w-1/3"></div> */}
       </div>
-      <span>&copy; Little Tags Shop Pvt. LTD</span>
+      <div className="flex items-center justify-center">
+        <span>&copy; Little Tags Shop Pvt. LTD</span>
+      </div>
     </div>
   );
 }
