@@ -1,11 +1,11 @@
 import "./styles.css";
-import Header from "../../layout/Header";
+import Header from "./Components/layout/Header";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import Home from "../landing-page/Home";
-import Shop from "../shop-page/Shop";
-import Sale from "../sale-page/Sale";
-import About from "../about-page/About";
-import Footer from "../../layout/Footer";
+import Home from "./Components/landing-page/Home";
+import Shop from "./Components/shop-page/Shop";
+import Sale from "./Components/sale-page/Sale";
+import About from "./Components/about-page/About";
+import Footer from "./Components/layout/Footer";
 function App() {
   return (
     <div className="App">

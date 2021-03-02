@@ -1,5 +1,7 @@
-import React from "react";
-import logo from "./../assets/logo/lt-logo.png";
+import React, {useContext} from "react";
+import {AppContext} from '../../../Context';
+import {LOCALES} from "./../../../i18n/constants"
+import logo from "./../../../../assets/logo/lt-logo.png";
 import Icon from "@material-ui/core/Icon";
 import { NavLink } from "react-router-dom";
 import Menu from "@material-ui/core/Menu";
@@ -9,15 +11,29 @@ import DrawerNav from "./DrawerNav";
 import { FormattedMessage } from "react-intl";
 export default function Header() {
   const [anchorEl, setAnchorEl] = React.useState(null);
+  const [langEl, setLangEl] = React.useState(null);
   const theme = useTheme();
   const isMatch = useMediaQuery(theme.breakpoints.down("md"));
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
   };
-
+  const handleLanguageMenu = (event) => {
+    setLangEl(event.currentTarget)
+  }
+  const handleLanguage = (locale) => {
+    setLangEl(null)
+    dispatch({
+      type: 'setLocale',
+      locale
+    })
+  };
   const handleClose = () => {
     setAnchorEl(null);
   };
+  const handleLangClose = () => {
+    setLangEl(null);
+  };
+  const {state, dispatch} = useContext(AppContext)
   return (
     <>
       {isMatch ? (
@@ -62,15 +78,36 @@ export default function Header() {
                 <FormattedMessage id="sale" />
               </NavLink>
             </div>
-            <div className="flex items-center justify-around ml-4 w-16 h-16">
+            <div
+              className="flex items-center justify-around ml-4"
+              onClick={handleLanguageMenu}
+            >
+              <Icon className="lt-text-accent lt-icon-base">translate</Icon>
+              <span className="font-semibold lt-text-accent">{state.locale}</span>
+              <Icon className="lt-text-accent lt-icon-base">keyboard_arrow_down</Icon>
+            </div>
+            <div className="flex items-center justify-around w-16 h-16">
               <Icon className="lt-text-accent lt-icon-base">shopping_cart</Icon>
             </div>
+            <Menu
+              id="lang-menu"
+              anchorEl={langEl}
+              keepMounted
+              open={Boolean(langEl)}
+              onClose={handleLangClose}
+              anchorOrigin={{ vertical: "bottom", horizontal: "bottom" }}
+            >
+              <MenuItem disabled={state.locale === LOCALES.ENGLISH} onClick={() => handleLanguage(LOCALES.ENGLISH)}>English</MenuItem>
+              <MenuItem disabled={state.locale === LOCALES.HINDI} onClick={() => handleLanguage(LOCALES.HINDI)}>Hindi</MenuItem>
+              <MenuItem disabled={state.locale === LOCALES.SPANISH} onClick={() => handleLanguage(LOCALES.SPANISH)}>Spanish</MenuItem>
+            </Menu>
             <div
               className="flex items-center justify-around w-16 h-16"
               onClick={handleClick}
             >
               <Icon className="lt-text-accent lt-icon-lg">account_circle</Icon>
             </div>
+
             <Menu
               id="simple-menu"
               anchorEl={anchorEl}

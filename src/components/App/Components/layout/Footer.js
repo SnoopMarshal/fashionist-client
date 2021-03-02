@@ -1,7 +1,7 @@
 import React from "react";
-import facebook from "./../assets/icons/ficon.png";
-import instagram from "./../assets/icons/iicon.png";
-import twitter from "./../assets/icons/ticon.png";
+import facebook from "./../../../../assets/icons/ficon.png";
+import instagram from "./../../../../assets/icons/iicon.png";
+import twitter from "./../../../../assets/icons/ticon.png";
 import Icon from "@material-ui/core/Icon";
 
 export default function Footer() {
