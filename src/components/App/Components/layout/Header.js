@@ -1,5 +1,4 @@
-import React, {useContext} from "react";
-import {AppContext} from '../../../Context';
+import React from "react";
 import { useMediaQuery, useTheme } from "@material-ui/core";
 import DrawerNav from "./DrawerNav";
 import DesktopNav from "./DesktopNav";

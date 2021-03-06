@@ -6,6 +6,12 @@ export default {
         home: 'home',
         shop: 'shop',
         sale: 'sale',
-        category: 'category'
+        category: 'category',
+        english: 'English',
+        hindi: 'Hindi',
+        spanish: 'Spanish',
+        en: 'EN',
+        hi: 'HI',
+        es: 'ES'
     }
 }

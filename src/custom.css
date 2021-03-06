@@ -1,46 +1,43 @@
 .lt-bg-primary {
-  background-color: #e40017 !important;
+  background-color: #EBE2E0;
 }
 .lt-bg-accent {
-  background-color: #30475e !important;
+  background-color: #373737;
 }
 .lt-bg-grey {
-  background-color: #f2f5f5;
+  background-color: #F8F8F8;
 }
 .lt-text-primary {
-  color: #e40017 !important;
+  color: #373737 !important;
 }
 .lt-text-accent {
-  color: #30475e;
+  color: #5E5E5E;
 }
 .lt-text-grey {
-  color: #f2f5f5;
+  color: #A7A7A7;
 }
 .lt-border-primary {
-  border-bottom: #e40017 solid !important;
+  border-bottom: #e40017 solid;
 }
 .lt-border-accent {
-  border-bottom: #51c2d5 solid !important;
+  border-bottom: #51c2d5 solid;
 }
 .lt-border-grey {
-  border-bottom: #f2f5f5 solid !important;
+  border-bottom: #f2f5f5 solid;
+}
+.lt-banner{
+  height: 36rem;
 }
 .lt-mt-80{
   margin-top: 80px;
 }
 .lt-header {
-  /* box-shadow: 20px 20px 20px 20px rgba( 0, 0, 0, 0.5); */
-  background: rgba(155, 155, 155, 0.6);
-  backdrop-filter: blur(4px);
   padding: 1rem 5rem;
 }
 .lt-footer{
   height: 200px;
 }
 .lt-header-mobile {
-  /* box-shadow: 20px 20px 20px 20px rgba( 0, 0, 0, 0.5); */
-  background: rgba(155, 155, 155, 0.6);
-  backdrop-filter: blur(4px);
   padding: 1rem 1rem;
 }
 .drawer-mobile-logo{

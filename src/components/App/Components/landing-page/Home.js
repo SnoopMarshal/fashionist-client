@@ -69,82 +69,9 @@ export default function Home() {
     getItemsElectronics();
   }, []);
   return (
-    <div className="">
-      {bannerItems.length > 0 ? (
-        <Carousel autoPlay={true} showArrows={false} infiniteLoop={true}>
-          {bannerItems.map((o) => (
-            <div
-              key={o.id}
-              className="flex carousel-container bg-white w-full items-center justify-center lt-border-primary"
-            >
-              <div className="flex flex-col h-full w-1/2 md:w-1/3 justify-end md:justify-center items-start lt-bg-primary px-1 md:px-4 lg:px-6 xl:px-10 pb-4 md:pb-2">
-                <span className="text-white font-bold text-base md:text-lg lg:text-xl xl:text-2xl text-left">
-                  {o.title}
-                </span>
-                <div className="mb-2">
-                  <span className="text-white italic text-sm">in </span>
-                  <span className="text-white text-base md:text-lg lg:text-xl font-semibold italic">
-                    {o.category}
-                  </span>
-                </div>
-              </div>
-              <div className="flex h-full w-1/2 md:w-2/3 justify-center items-end pb-8 relative">
-                <div
-                  className="flex h-2/3 w-1/3 bg-no-repeat bg-contain bg-center"
-                  style={{ backgroundImage: "url(" + o.image + ")" }}
-                ></div>
-                <span className="absolute bottom-0 right-0 p-1 md:px-6 md:py-2 capitalize lt-bg-accent text-white font-semibold cursor-pointer mb-4 mr-1">
-                  shop now
-                </span>
-              </div>
-            </div>
-          ))}
-        </Carousel>
-      ) : (
-        <div className="px-1 pb-2">
-          <Skeleton variant="rect" height={bannerHeight} />
-        </div>
-      )}
-      <div className="flex flex-col">
-        <div className="flex justify-start items-center p-4 lt-bg-accent rounded-md mb-1">
-          <span className="font-semibold text-white text-lg">For Her</span>
-        </div>
-        <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-4">
-          {itemsForHer.map((o) => (
-            <ItemCard item={o} />
-          ))}
-        </div>
-      </div>
-      <div className="flex flex-col">
-        <div className="flex justify-start items-center p-4 lt-bg-primary rounded-md mb-1">
-          <span className="font-semibold text-white text-lg">For Him</span>
-        </div>
-        <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-4">
-          {itemsForHim.map((o) => (
-            <ItemCard item={o} />
-          ))}
-        </div>
-      </div>
-      <div className="flex flex-col">
-        <div className="flex justify-start items-center p-4 lt-bg-accent rounded-md mb-1">
-          <span className="font-semibold text-white text-lg">Jewelery</span>
-        </div>
-        <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-4">
-          {itemsJewelery.map((o) => (
-            <ItemCard item={o} />
-          ))}
-        </div>
-      </div>
-      <div className="flex flex-col">
-        <div className="flex justify-start items-center p-4 lt-bg-primary rounded-md mb-1">
-          <span className="font-semibold text-white text-lg">Electronics</span>
-        </div>
-        <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-4">
-          {itemsElectronics.map((o) => (
-            <ItemCard item={o} />
-          ))}
-        </div>
-      </div>
+    <div className="lt-bg-primary lt-banner relative">
+      <div className="flex w-1/2"></div>
+      <div className="flex w-1/2"></div>
     </div>
   );
 }
