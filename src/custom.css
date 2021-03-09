@@ -132,3 +132,17 @@
     height: 145px;
   }
 }
+/* carousel dot */
+.carousel .control-dots .dot {
+  transition: opacity .25s ease-in;
+  opacity: .3;
+  filter: alpha(opacity=30);
+  box-shadow: 1px 1px 2px rgb(0 0 0 / 90%);
+  background: #fff;
+  border-radius: 0;
+  width: 25px;
+  height: 1px;
+  cursor: pointer;
+  display: inline-block;
+  margin: 0 8px;
+}

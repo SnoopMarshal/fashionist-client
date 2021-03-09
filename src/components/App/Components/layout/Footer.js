@@ -1,7 +1,7 @@
 import React from "react";
-import facebook from "./../assets/icons/ficon.png";
-import instagram from "./../assets/icons/iicon.png";
-import twitter from "./../assets/icons/ticon.png";
+import facebook from "./../../../../assets/icons/ficon.png";
+import instagram from "./../../../../assets/icons/iicon.png";
+import twitter from "./../../../../assets/icons/ticon.png";
 import Icon from "@material-ui/core/Icon";
 
 export default function Footer() {
@@ -29,7 +29,9 @@ export default function Footer() {
         </div>
         {/* <div className="flex w-1/3"></div> */}
       </div>
-      <span>&copy; Little Tags Shop Pvt. LTD</span>
+      <div className="flex items-center justify-center">
+        <span>&copy; Little Tags Shop Pvt. LTD</span>
+      </div>
     </div>
   );
 }
