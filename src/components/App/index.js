@@ -6,18 +6,20 @@ import Shop from "./Components/shop-page/Shop";
 import Sale from "./Components/sale-page/Sale";
 import About from "./Components/about-page/About";
 import Footer from "./Components/layout/Footer";
+import Login from "./Components/auth/Login";
 function App() {
   return (
     <div className="App">
       <Router>
-        <Header />
+        {/* <Header /> */}
         <Switch>
-          <Route path="/" exact component={Home} />
+          <Route path="/auth/login" exact component={Login} />
+          {/* <Route path="/" exact component={Home} />
           <Route path="/shop" exact component={Shop} />
           <Route path="/sale" exact component={Sale} />
-          <Route path="/about" exact component={About} />
+          <Route path="/about" exact component={About} /> */}
         </Switch>
-        <Footer/>
+        {/* <Footer/> */}
       </Router>
     </div>
   );

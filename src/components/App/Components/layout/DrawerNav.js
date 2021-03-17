@@ -86,7 +86,7 @@ export default function DrawerNav() {
     </div>
   );
   return (
-    <div className="fixed w-full lt-header-mobile top-0 flex justify-between items-center bg-transparent p-4 shadow-lg z-10">
+    <div className="fixed w-full lt-header-mobile top-0 flex justify-between items-center lt-bg-primary p-4 z-10">
       <div className="flex items-center" onClick={toggleDrawer(true)}>
         <Icon className="lt-text-accent">menu</Icon>
         <div className="pl-2">

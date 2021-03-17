@@ -31,7 +31,7 @@ export default function DesktopNav() {
   };
   const { state, dispatch } = useContext(AppContext);
   return (
-    <div className="fixed w-full lt-header top-0 flex justify-between items-center bg-transparent z-10">
+    <div className="fixed w-full lt-header top-0 flex justify-between items-center lt-bg-primary z-10">
       <div className="flex items-center justify-between w-full">
         <div className="flex items-center">
           <div className="flex items-center h-16 w-24">
