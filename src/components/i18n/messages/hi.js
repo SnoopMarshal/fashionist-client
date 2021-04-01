@@ -7,11 +7,13 @@ export default {
     shop: "शॉप",
     category: "केटेगरी",
     sale: "सेल",
-    english: "English",
-    hindi: "Hindi",
-    spanish: "Spanish",
+    english: "अंग्रेज़ी",
+    hindi: "हिन्दी",
+    spanish: "स्पेनिश",
     en: "EN",
-    hi: "HI",
+    hi: "हि",
     es: "ES",
+    login: "लॉग इन करें",
+    signup: "साइन इन करें"
   },
 };

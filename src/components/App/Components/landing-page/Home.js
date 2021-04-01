@@ -8,7 +8,7 @@ import forhim from "./../../../../assets/images/for-him.png";
 import mjacket from "./../../../../assets/images/for-him-jacket.png";
 import heels from "./../../../../assets/images/heels.png";
 import specs from "./../../../../assets/images/specs.png";
-const axios = require("axios");
+import axios from "axios";
 export default function Home() {
   const bannerHeight = window.innerHeight * 0.4;
   const [bannerItems, setBannerItems] = React.useState([]);

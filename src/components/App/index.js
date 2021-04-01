@@ -7,21 +7,30 @@ import Sale from "./Components/sale-page/Sale";
 import About from "./Components/about-page/About";
 import Footer from "./Components/layout/Footer";
 import Login from "./Components/auth/Login";
+import firebase from "firebase/app";
+import "firebase/auth";
+import Register from "./Components/auth/Signup";
+import { Provider } from "react-redux";
+import store from "./store";
 function App() {
   return (
+    <Provider store={store}>
     <div className="App">
+      
       <Router>
-        {/* <Header /> */}
+        <Header />
         <Switch>
+        <Route path="/" exact component={Home} />
+          <Route path="/auth/register" exact component={Register} />
           <Route path="/auth/login" exact component={Login} />
-          {/* <Route path="/" exact component={Home} />
-          <Route path="/shop" exact component={Shop} />
+          {/* <Route path="/shop" exact component={Shop} />
           <Route path="/sale" exact component={Sale} />
           <Route path="/about" exact component={About} /> */}
         </Switch>
         {/* <Footer/> */}
       </Router>
     </div>
+    </Provider>
   );
 }
 

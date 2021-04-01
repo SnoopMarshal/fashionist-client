@@ -12,6 +12,8 @@ export default {
         spanish: 'Spanish',
         en: 'EN',
         hi: 'HI',
-        es: 'ES'
+        es: 'ES',
+        login: 'Login',
+        signup: 'Sign Up'
     }
 }
