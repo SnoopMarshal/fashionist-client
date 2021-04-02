@@ -1,4 +1,4 @@
-import { SET_CURRENT_USER, USER_LOADING } from "./../actions/types";
+import { SET_CURRENT_USER, USER_LOADING, LOGOUT } from "./../actions/types";
 
 const isEmpty = require("is-empty");
 
@@ -22,6 +22,14 @@ export default function (state = initialState, action) {
         ...state,
         isLoading: true
       };
+    case LOGOUT: {
+      localStorage.removeItem("jwtToken");
+      return {
+        ...state,
+        isAuthenticated: false,
+        user: {}
+      }
+    }
     default:
       return state;
   }

@@ -1,11 +1,37 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import {Link, Redirect} from "react-router-dom";
 import { useForm } from "react-hook-form";
 import logo from "./../../../../assets/logo/fashionist.png";
 import { FormattedMessage } from "react-intl";
+import PropTypes from "prop-types";
+import { connect } from "react-redux";
+import { loginUser } from "./../../../../actions/authAction";
+import classnames from "classnames";
+const Login = (props) => {
+  const [error, setError] = useState({});
 
-const Login = () => {
+  useEffect(
+    () => {
+      if (props.auth.isAuthenticated) {
+        return <Redirect to="/" />
+      }
+      if (props.errors) {
+        setError(props.errors);
+      }
+    },
+    [error, props.auth.isAuthenticated, props.errors]
+  );
   const { register, handleSubmit, errors } = useForm();
-  const onSubmit = (data) => {};
+  const onSubmit = (data) => {
+    const userData = {
+      email: data.email,
+      password: data.password,
+    };
+    props.loginUser(userData);
+  };
+  if(props.auth.isAuthenticated){
+    return <Redirect to="/" />
+  }
   return (
     <div className="w-screen h-screen flex justify-center items-center px-2">
       <div className="lt-bg-primary rounded-md shadow-md w-full md:w-2/3 lg:w-1/3 xl:w-1/4">
@@ -38,7 +64,7 @@ const Login = () => {
               className="w-full px-4 py-2 lt-bg-accent text-white rounded-md font-semibold"
               type="submit"
             >
-              <FormattedMessage id="login"/>
+              <FormattedMessage id="login" />
             </button>
           </div>
         </form>
@@ -46,4 +72,13 @@ const Login = () => {
     </div>
   );
 };
-export default Login;
+Login.propTypes = {
+  loginUser: PropTypes.func.isRequired,
+  auth: PropTypes.object.isRequired,
+  errors: PropTypes.object.isRequired,
+};
+const mapStateToProps = (state) => ({
+  auth: state.auth,
+  errors: state.errors,
+});
+export default connect(mapStateToProps, { loginUser })(Login);

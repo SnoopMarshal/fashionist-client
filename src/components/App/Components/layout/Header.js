@@ -2,7 +2,8 @@ import React from "react";
 import { useMediaQuery, useTheme } from "@material-ui/core";
 import DrawerNav from "./DrawerNav";
 import DesktopNav from "./DesktopNav";
-export default function Header() {
+
+const Header = (props) => {
   const theme = useTheme();
   const isMatch = useMediaQuery(theme.breakpoints.down("md"));
   return (
@@ -15,3 +16,14 @@ export default function Header() {
     </>
   );
 }
+
+export default Header;
+// DesktopNav.propTypes = {
+//   logout: PropTypes.func.isRequired,
+//   auth: PropTypes.object.isRequired,
+// };
+
+// const mapStateToProps = (state) => ({
+//   auth: state.auth,
+// });
+// export default connect(mapStateToProps, { logoutUser })(Header);

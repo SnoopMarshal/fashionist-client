@@ -110,7 +110,7 @@ export default function Home() {
               src={women}
               alt="bannerimage"
               sizes=""
-              srcset=""
+              srcSet=""
             />
           </div>
         </div>
@@ -141,7 +141,7 @@ export default function Home() {
                 src={forher}
                 alt="forherimage"
                 sizes=""
-                srcset=""
+                srcSet=""
               />
             </div>
             <div className="absolute bottom-0 flex w-full mb-4 justify-center">
@@ -170,15 +170,15 @@ export default function Home() {
               Accessories
             </span>
           </div>
-          <div class="h-full grid grid-cols-3 gap-4">
-            <div class="flex flex-col">
+          <div className="h-full grid grid-cols-3 gap-4">
+            <div className="flex flex-col">
               <div className="flex justify-center items-center for-her-product-card">
                 <img
                   className=""
                   src={wjacket}
                   alt="jacket"
                   sizes=""
-                  srcset=""
+                  srcSet=""
                 />
               </div>
               <div className="flex flex-col items-center">
@@ -188,14 +188,14 @@ export default function Home() {
                 <span className="font-semibold">$59</span>
               </div>
             </div>
-            <div class="flex flex-col">
+            <div className="flex flex-col">
               <div className="flex justify-center items-center for-her-product-card">
                 <img
                   className=""
                   src={wjacket}
                   alt="jacket"
                   sizes=""
-                  srcset=""
+                  srcSet=""
                 />
               </div>
               <div className="flex flex-col items-center">
@@ -205,14 +205,14 @@ export default function Home() {
                 <span className="font-semibold">$59</span>
               </div>
             </div>
-            <div class="flex flex-col">
+            <div className="flex flex-col">
               <div className="flex justify-center items-center for-her-product-card">
                 <img
                   className=""
                   src={wjacket}
                   alt="jacket"
                   sizes=""
-                  srcset=""
+                  srcSet=""
                 />
               </div>
               <div className="flex flex-col items-center">
@@ -222,14 +222,14 @@ export default function Home() {
                 <span className="font-semibold">$59</span>
               </div>
             </div>
-            <div class="flex flex-col">
+            <div className="flex flex-col">
               <div className="flex justify-center items-center for-her-product-card">
                 <img
                   className=""
                   src={wjacket}
                   alt="jacket"
                   sizes=""
-                  srcset=""
+                  srcSet=""
                 />
               </div>
               <div className="flex flex-col items-center">
@@ -239,14 +239,14 @@ export default function Home() {
                 <span className="font-semibold">$59</span>
               </div>
             </div>
-            <div class="flex flex-col">
+            <div className="flex flex-col">
               <div className="flex justify-center items-center for-her-product-card">
                 <img
                   className=""
                   src={wjacket}
                   alt="jacket"
                   sizes=""
-                  srcset=""
+                  srcSet=""
                 />
               </div>
               <div className="flex flex-col items-center">
@@ -256,14 +256,14 @@ export default function Home() {
                 <span className="font-semibold">$59</span>
               </div>
             </div>
-            <div class="flex flex-col">
+            <div className="flex flex-col">
               <div className="flex justify-center items-center for-her-product-card">
                 <img
                   className=""
                   src={wjacket}
                   alt="jacket"
                   sizes=""
-                  srcset=""
+                  srcSet=""
                 />
               </div>
               <div className="flex flex-col items-center">
@@ -279,32 +279,32 @@ export default function Home() {
       <div className="w-full flex relative">
         <div className="absolute w-full h-full flex justify-center items-center">
           <div className="border border-white px-2 py-1 sm:px-4 sm:py-2">
-            <div className="bg-white px-12 py-2 sm:px-20 sm:py-4 md:px-28 md:py-6 lg:px-40 lg:py-8 xl:px-52 xl:py-10" >
+            <div className="lt-bg-transparent px-12 py-2 sm:px-20 sm:py-4 md:px-28 md:py-6 lg:px-40 lg:py-8 xl:px-52 xl:py-10" >
               <span className="font-bold uppercase text-base sm:text-lg md:text-2xl lg:text-3xl xl:text-4xl">
                 SALE
               </span>
             </div>
           </div>
         </div>
-        <div className="w-1/2 px-2 md:px-6 lg:px-12 py-4">
-          <div className="w-5/6">
+        <div className="flex w-1/2 justify-end px-2 md:px-6 lg:px-12 py-4">
+          <div className="w-full flex justify-center">
           <img
                 className=""
                 src={heels}
                 alt="forherimage"
                 sizes=""
-                srcset=""
+                srcSet=""
               />
           </div>
         </div>
         <div className="flex w-1/2 justify-end px-2 md:px-6 lg:px-12 py-4">
-          <div className="w-5/6">
+          <div className="w-full flex justify-center">
           <img
                 className=""
                 src={specs}
                 alt="forherimage"
                 sizes=""
-                srcset=""
+                srcSet=""
               />
           </div>
         </div>
@@ -341,15 +341,15 @@ export default function Home() {
               Accessories
             </span>
           </div>
-          <div class="h-full grid grid-cols-3 gap-4">
-            <div class="flex flex-col">
+          <div className="h-full grid grid-cols-3 gap-4">
+            <div className="flex flex-col">
               <div className="flex justify-center items-center for-her-product-card">
                 <img
                   className=""
                   src={mjacket}
                   alt="jacket"
                   sizes=""
-                  srcset=""
+                  srcSet=""
                 />
               </div>
               <div className="flex flex-col items-center">
@@ -359,14 +359,14 @@ export default function Home() {
                 <span className="font-semibold">$59</span>
               </div>
             </div>
-            <div class="flex flex-col">
+            <div className="flex flex-col">
               <div className="flex justify-center items-center for-her-product-card">
                 <img
                   className=""
                   src={mjacket}
                   alt="jacket"
                   sizes=""
-                  srcset=""
+                  srcSet=""
                 />
               </div>
               <div className="flex flex-col items-center">
@@ -376,14 +376,14 @@ export default function Home() {
                 <span className="font-semibold">$59</span>
               </div>
             </div>
-            <div class="flex flex-col">
+            <div className="flex flex-col">
               <div className="flex justify-center items-center for-her-product-card">
                 <img
                   className=""
                   src={mjacket}
                   alt="jacket"
                   sizes=""
-                  srcset=""
+                  srcSet=""
                 />
               </div>
               <div className="flex flex-col items-center">
@@ -393,14 +393,14 @@ export default function Home() {
                 <span className="font-semibold">$59</span>
               </div>
             </div>
-            <div class="flex flex-col">
+            <div className="flex flex-col">
               <div className="flex justify-center items-center for-her-product-card">
                 <img
                   className=""
                   src={mjacket}
                   alt="jacket"
                   sizes=""
-                  srcset=""
+                  srcSet=""
                 />
               </div>
               <div className="flex flex-col items-center">
@@ -410,14 +410,14 @@ export default function Home() {
                 <span className="font-semibold">$59</span>
               </div>
             </div>
-            <div class="flex flex-col">
+            <div className="flex flex-col">
               <div className="flex justify-center items-center for-her-product-card">
                 <img
                   className=""
                   src={mjacket}
                   alt="jacket"
                   sizes=""
-                  srcset=""
+                  srcSet=""
                 />
               </div>
               <div className="flex flex-col items-center">
@@ -427,14 +427,14 @@ export default function Home() {
                 <span className="font-semibold">$59</span>
               </div>
             </div>
-            <div class="flex flex-col">
+            <div className="flex flex-col">
               <div className="flex justify-center items-center for-her-product-card">
                 <img
                   className=""
                   src={mjacket}
                   alt="jacket"
                   sizes=""
-                  srcset=""
+                  srcSet=""
                 />
               </div>
               <div className="flex flex-col items-center">
@@ -459,7 +459,7 @@ export default function Home() {
                 src={forhim}
                 alt="forherimage"
                 sizes=""
-                srcset=""
+                srcSet=""
               />
             </div>
             <div className="absolute bottom-0 flex w-full mb-4 justify-center">

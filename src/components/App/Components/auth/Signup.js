@@ -1,15 +1,33 @@
-import React, { useRef } from "react";
+import React, { useRef, useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
+import { withRouter } from "react-router-dom";
 import logo from "./../../../../assets/logo/fashionist.png";
 import { FormattedMessage } from "react-intl";
+import PropTypes from "prop-types";
+import { connect } from "react-redux";
+import { registerUser } from "./../../../../actions/authAction";
+import classnames from "classnames";
 
-const Register = () => {
+const Register = (props) => {
+  const [error, setError] = useState({});
+
+  useEffect(() => {
+    if (props.errors) {
+      setError(props.errors);
+    }
+  }, [error, props.errors]);
   const { register, handleSubmit, errors, watch } = useForm();
   const password = useRef({});
   password.current = watch("password", "");
 
   const onSubmit = (data) => {
-      console.log(data);
+    const newUser = {
+      name: data.name,
+      email: data.email,
+      password: data.password,
+      verifyPassword: data.verifypassword
+    };
+    props.registerUser(newUser, props.history);
   };
   return (
     <div className="w-screen h-screen flex justify-center items-center px-2">
@@ -28,18 +46,21 @@ const Register = () => {
             type="text"
             ref={register({ required: "You must specify a name" })}
           />
-          {errors.name && <p>{errors.name.message}</p>}
+          {errors.name && <p className="text-red-600">{errors.name.message}</p>}
           <input
             className="pl-2 py-2 rounded-md focus:outline-none mb-4"
             placeholder="jondoe@example.abc"
             name="email"
             type="email"
-            ref={register({ required: "Email is required", pattern: {
+            ref={register({
+              required: "Email is required",
+              pattern: {
                 value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
-                message: "Invalid email address"
-              } })}
+                message: "Invalid email address",
+              },
+            })}
           />{" "}
-          {errors.email && <p>{errors.email.message}</p>}
+          {errors.email && <p className="text-red-600">{errors.email.message}</p>}
           <input
             name="password"
             type="password"
@@ -47,7 +68,7 @@ const Register = () => {
             className="pl-2 py-2 rounded-md focus:outline-none mb-4"
             placeholder="******"
           />
-          {errors.password && <p>{errors.password.message}</p>}
+          {errors.password && <p className="text-red-600">{errors.password.message}</p>}
           <input
             name="verifypassword"
             type="password"
@@ -59,7 +80,7 @@ const Register = () => {
             className="pl-2 py-2 rounded-md focus:outline-none mb-4"
             placeholder="******"
           />
-          {errors.verifypassword && <p>{errors.verifypassword.message}</p>}
+          {errors.verifypassword && <p className="text-red-600">{errors.verifypassword.message}</p>}
           <div className="flex items-center py-2">
             <button
               className="w-full px-4 py-2 lt-bg-accent text-white rounded-md font-semibold"
@@ -68,10 +89,23 @@ const Register = () => {
               <FormattedMessage id="signup" />
             </button>
           </div>
+          {error && <p>{error.email}</p>}
         </form>
       </div>
     </div>
   );
 };
 
-export default Register;
+Register.propTypes = {
+  registerUser: PropTypes.func.isRequired,
+  auth: PropTypes.object.isRequired,
+  errors: PropTypes.object.isRequired
+};
+const mapStateToProps = state => ({
+  auth: state.auth,
+  errors: state.errors
+});
+export default connect(
+  mapStateToProps,
+  { registerUser }
+)(withRouter(Register));

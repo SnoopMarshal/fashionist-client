@@ -11,25 +11,29 @@ import firebase from "firebase/app";
 import "firebase/auth";
 import Register from "./Components/auth/Signup";
 import { Provider } from "react-redux";
-import store from "./store";
+import { useMediaQuery, useTheme } from "@material-ui/core";
+import DrawerNav from "./Components/layout/DrawerNav";
+import DesktopNav from "./Components/layout/DesktopNav";
+import store from "./../../store";
 function App() {
+  const theme = useTheme();
+  const isMatch = useMediaQuery(theme.breakpoints.down("md"));
   return (
     <Provider store={store}>
-    <div className="App">
-      
-      <Router>
-        <Header />
-        <Switch>
-        <Route path="/" exact component={Home} />
-          <Route path="/auth/register" exact component={Register} />
-          <Route path="/auth/login" exact component={Login} />
-          {/* <Route path="/shop" exact component={Shop} />
+      <div className="App">
+        <Router>
+          {isMatch ? <DrawerNav /> : <DesktopNav />}
+          <Switch>
+            <Route path="/" exact component={Home} />
+            <Route path="/auth/register" exact component={Register} />
+            <Route path="/auth/login" exact component={Login} />
+            {/* <Route path="/shop" exact component={Shop} />
           <Route path="/sale" exact component={Sale} />
           <Route path="/about" exact component={About} /> */}
-        </Switch>
-        {/* <Footer/> */}
-      </Router>
-    </div>
+          </Switch>
+          {/* <Footer/> */}
+        </Router>
+      </div>
     </Provider>
   );
 }

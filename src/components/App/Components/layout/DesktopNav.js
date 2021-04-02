@@ -3,16 +3,49 @@ import { AppContext } from "../../../Context";
 import { LOCALES } from "./../../../i18n/constants";
 import logo from "./../../../../assets/logo/fashionist.png";
 import Icon from "@material-ui/core/Icon";
-import { NavLink } from "react-router-dom";
+import { Link, NavLink, Redirect } from "react-router-dom";
 import Menu from "@material-ui/core/Menu";
 import MenuItem from "@material-ui/core/MenuItem";
 import { FormattedMessage } from "react-intl";
-export default function DesktopNav() {
-  const [anchorEl, setAnchorEl] = React.useState(null);
-  const [langEl, setLangEl] = React.useState(null);
+import PropTypes from "prop-types";
+import { connect } from "react-redux";
+import { logoutUser } from "./../../../../actions/authAction";
+const DesktopNav = ({ auth: { isAuthenticated, isLoading }, logoutUser }) => {
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
   };
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+  const handleLangClose = () => {
+    setLangEl(null);
+  };
+  const logout = () => {
+    handleClose();
+    logoutUser();
+  }
+  const authLinks = (
+    <>
+      <MenuItem onClick={handleClose}>Profile</MenuItem>
+      <MenuItem onClick={handleClose}>My account</MenuItem>
+      <MenuItem onClick={logout}>Logout</MenuItem>
+    </>
+  );
+  const guestLinks = (
+    <>
+      <MenuItem onClick={handleClose}>
+        <Link to="/auth/login">Login</Link>
+      </MenuItem>
+    </>
+  );
+  const authBag = (
+    <div className="flex items-center justify-around w-16 h-16">
+      <Icon className="lt-text-accent lt-icon-base">shopping_cart</Icon>
+    </div>
+  );
+  const guestBag = <></>;
+  const [anchorEl, setAnchorEl] = React.useState(null);
+  const [langEl, setLangEl] = React.useState(null);
   const handleLanguageMenu = (event) => {
     setLangEl(event.currentTarget);
   };
@@ -22,12 +55,6 @@ export default function DesktopNav() {
       type: "setLocale",
       locale,
     });
-  };
-  const handleClose = () => {
-    setAnchorEl(null);
-  };
-  const handleLangClose = () => {
-    setLangEl(null);
   };
   const { state, dispatch } = useContext(AppContext);
   return (
@@ -85,9 +112,6 @@ export default function DesktopNav() {
               keyboard_arrow_down
             </Icon>
           </div>
-          <div className="flex items-center justify-around w-16 h-16">
-            <Icon className="lt-text-accent lt-icon-base">shopping_cart</Icon>
-          </div>
           <Menu
             id="lang-menu"
             anchorEl={langEl}
@@ -115,6 +139,8 @@ export default function DesktopNav() {
               <FormattedMessage id="spanish" />
             </MenuItem>
           </Menu>
+
+          {!isLoading && <div>{isAuthenticated ? authBag : guestBag}</div>}
           <div
             className="flex items-center justify-around w-16 h-16"
             onClick={handleClick}
@@ -129,12 +155,23 @@ export default function DesktopNav() {
             onClose={handleClose}
             anchorOrigin={{ vertical: "bottom", horizontal: "right" }}
           >
-            <MenuItem onClick={handleClose}>Profile</MenuItem>
+            {!isLoading && <div>{isAuthenticated ? authLinks : guestLinks}</div>}
+            {/* <MenuItem onClick={handleClose}>Profile</MenuItem>
             <MenuItem onClick={handleClose}>My account</MenuItem>
-            <MenuItem onClick={handleClose}>Logout</MenuItem>
+            <MenuItem onClick={handleClose}>Logout</MenuItem> */}
           </Menu>
         </div>
       </div>
     </div>
   );
-}
+};
+
+DesktopNav.propTypes = {
+  logoutUser: PropTypes.func.isRequired,
+  auth: PropTypes.object.isRequired,
+};
+
+const mapStateToProps = (state) => ({
+  auth: state.auth,
+});
+export default connect(mapStateToProps, { logoutUser })(DesktopNav);
