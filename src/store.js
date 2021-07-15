@@ -6,6 +6,6 @@ const initialState = {};
 const middleWare = [thunk];
 // Note: this API requires redux@>=3.1.0
 const store = createStore(rootReducer, initialState, 
-compose( applyMiddleware(...middleWare), window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()));
+compose( applyMiddleware(...middleWare), window.devToolsExtension ? window.devToolsExtension() : f => f));
 
 export default store;

@@ -38,6 +38,7 @@
   height: 200px;
 }
 .lt-header-mobile {
+  min-height: 96px;
   padding: 1rem 1rem;
 }
 .drawer-mobile-logo {
@@ -183,7 +184,8 @@
   );
 }
 .for-her-product-card {
-  background-color: #f8f8f8;
+  background: rgb(248,248,248);
+  background: linear-gradient(90deg, rgba(248,248,248,1) 0%, rgba(248,248,248,1) 50%, rgba(255,255,255,1) 100%); 
 }
 .shop-button {
   background-color: #ffffff60;

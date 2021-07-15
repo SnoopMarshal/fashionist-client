@@ -9,6 +9,7 @@ import mjacket from "./../../../../assets/images/for-him-jacket.png";
 import heels from "./../../../../assets/images/heels.png";
 import specs from "./../../../../assets/images/specs.png";
 import axios from "axios";
+import ItemCard from "./components/item-card";
 export default function Home() {
   const bannerHeight = window.innerHeight * 0.4;
   const [bannerItems, setBannerItems] = React.useState([]);
@@ -28,20 +29,99 @@ export default function Home() {
   };
   const getItemsForHim = async () => {
     try {
-      const response = await axios.get(
-        "https://fakestoreapi.com/products/category/men%20clothing?limit=6"
-      );
-      setForHimItems(response.data);
+      const himItems = [{
+        id:1,
+        category: 'man',
+        name: 'Olive Man Jacket',
+        price: 59,
+        image: mjacket
+      },
+      {
+        id:2,
+        category: 'man',
+        name: 'Olive Man Jacket',
+        price: 59,
+        image: mjacket
+      },
+      {
+        id:3,
+        category: 'man',
+        name: 'Olive Man Jacket',
+        price: 59,
+        image: mjacket
+      },
+      {
+        id:4,
+        category: 'man',
+        name: 'Olive Man Jacket',
+        price: 59,
+        image: mjacket
+      },
+      {
+        id:5,
+        category: 'man',
+        name: 'Olive Man Jacket',
+        price: 39,
+        image: mjacket
+      },
+      {
+        id:6,
+        category: 'man',
+        name: 'Olive Man Jacket',
+        price: 59,
+        image: mjacket
+      }]
+      setForHimItems(himItems);
+      console.log(itemsForHim);
     } catch (error) {
       console.log(error);
     }
   };
   const getItemsForHer = async () => {
     try {
-      const response = await axios.get(
-        "https://fakestoreapi.com/products/category/women%20clothing?limit=6"
-      );
-      setForHerItems(response.data);
+      const herItems = [{
+        id:22,
+        category: 'woman',
+        name: 'Baby Pink Jacket',
+        price: 59,
+        image: wjacket
+      },
+      {
+        id:24,
+        category: 'woman',
+        name: 'Baby Pink Jacket',
+        price: 59,
+        image: wjacket
+      },
+      {
+        id:21,
+        category: 'woman',
+        name: 'Baby Pink Jacket',
+        price: 59,
+        image: wjacket
+      },
+      {
+        id:27,
+        category: 'woman',
+        name: 'Baby Pink Jacket',
+        price: 59,
+        image: wjacket
+      },
+      {
+        id:29,
+        category: 'woman',
+        name: 'Baby Pink Jacket',
+        price: 39,
+        image: wjacket
+      },
+      {
+        id:20,
+        category: 'woman',
+        name: 'Baby Pink Jacket',
+        price: 59,
+        image: wjacket
+      }]
+      setForHerItems(herItems);
     } catch (error) {
       console.log(error);
     }
@@ -125,7 +205,7 @@ export default function Home() {
         <div className="flex justify-between items-center w-full md:hidden for-her-header px-4 py-4 mb-2">
           <span className="font-semibold">Flat 20% discount on winter wears</span>
           <div className="flex w-1/2 justify-end">
-          <button className="shop-button font-bold px-4 py-1">shop now</button>
+            <button className="shop-button font-bold px-4 py-1">shop now</button>
           </div>
         </div>
         <div className="hidden md:flex md:flex-col justify-end w-1/3">
@@ -171,108 +251,11 @@ export default function Home() {
             </span>
           </div>
           <div className="h-full grid grid-cols-3 gap-4">
-            <div className="flex flex-col">
-              <div className="flex justify-center items-center for-her-product-card">
-                <img
-                  className=""
-                  src={wjacket}
-                  alt="jacket"
-                  sizes=""
-                  srcSet=""
-                />
-              </div>
-              <div className="flex flex-col items-center">
-                <span className="lt-text-grey text-center">
-                  Baby pink pufer jacket
-                </span>
-                <span className="font-semibold">$59</span>
-              </div>
-            </div>
-            <div className="flex flex-col">
-              <div className="flex justify-center items-center for-her-product-card">
-                <img
-                  className=""
-                  src={wjacket}
-                  alt="jacket"
-                  sizes=""
-                  srcSet=""
-                />
-              </div>
-              <div className="flex flex-col items-center">
-                <span className="lt-text-grey text-center">
-                  Baby pink pufer jacket
-                </span>
-                <span className="font-semibold">$59</span>
-              </div>
-            </div>
-            <div className="flex flex-col">
-              <div className="flex justify-center items-center for-her-product-card">
-                <img
-                  className=""
-                  src={wjacket}
-                  alt="jacket"
-                  sizes=""
-                  srcSet=""
-                />
-              </div>
-              <div className="flex flex-col items-center">
-                <span className="lt-text-grey text-center">
-                  Baby pink pufer jacket
-                </span>
-                <span className="font-semibold">$59</span>
-              </div>
-            </div>
-            <div className="flex flex-col">
-              <div className="flex justify-center items-center for-her-product-card">
-                <img
-                  className=""
-                  src={wjacket}
-                  alt="jacket"
-                  sizes=""
-                  srcSet=""
-                />
-              </div>
-              <div className="flex flex-col items-center">
-                <span className="lt-text-grey text-center">
-                  Baby pink pufer jacket
-                </span>
-                <span className="font-semibold">$59</span>
-              </div>
-            </div>
-            <div className="flex flex-col">
-              <div className="flex justify-center items-center for-her-product-card">
-                <img
-                  className=""
-                  src={wjacket}
-                  alt="jacket"
-                  sizes=""
-                  srcSet=""
-                />
-              </div>
-              <div className="flex flex-col items-center">
-                <span className="lt-text-grey text-center">
-                  Baby pink pufer jacket
-                </span>
-                <span className="font-semibold">$59</span>
-              </div>
-            </div>
-            <div className="flex flex-col">
-              <div className="flex justify-center items-center for-her-product-card">
-                <img
-                  className=""
-                  src={wjacket}
-                  alt="jacket"
-                  sizes=""
-                  srcSet=""
-                />
-              </div>
-              <div className="flex flex-col items-center">
-                <span className="lt-text-grey text-center">
-                  Baby pink pufer jacket
-                </span>
-                <span className="font-semibold">$59</span>
-              </div>
-            </div>
+          {
+              itemsForHer.map(her => (
+                <ItemCard key={her.id} item={her} />
+              ))
+            }
           </div>
         </div>
       </div>
@@ -288,24 +271,24 @@ export default function Home() {
         </div>
         <div className="flex w-1/2 justify-end px-2 md:px-6 lg:px-12 py-4">
           <div className="w-full flex justify-center">
-          <img
-                className=""
-                src={heels}
-                alt="forherimage"
-                sizes=""
-                srcSet=""
-              />
+            <img
+              className=""
+              src={heels}
+              alt="forherimage"
+              sizes=""
+              srcSet=""
+            />
           </div>
         </div>
         <div className="flex w-1/2 justify-end px-2 md:px-6 lg:px-12 py-4">
           <div className="w-full flex justify-center">
-          <img
-                className=""
-                src={specs}
-                alt="forherimage"
-                sizes=""
-                srcSet=""
-              />
+            <img
+              className=""
+              src={specs}
+              alt="forherimage"
+              sizes=""
+              srcSet=""
+            />
           </div>
         </div>
       </div>
@@ -319,7 +302,7 @@ export default function Home() {
         <div className="flex justify-between items-center w-full md:hidden for-her-header px-4 py-4 mb-2">
           <span className="font-semibold">Flat 20% discount on winter wears</span>
           <div className="flex w-1/2 justify-end">
-          <button className="shop-button font-bold px-4 py-1">shop now</button>
+            <button className="shop-button font-bold px-4 py-1">shop now</button>
           </div>
         </div>
         <div className="w-full md:w-2/3 p-0 md:p-4">
@@ -342,108 +325,11 @@ export default function Home() {
             </span>
           </div>
           <div className="h-full grid grid-cols-3 gap-4">
-            <div className="flex flex-col">
-              <div className="flex justify-center items-center for-her-product-card">
-                <img
-                  className=""
-                  src={mjacket}
-                  alt="jacket"
-                  sizes=""
-                  srcSet=""
-                />
-              </div>
-              <div className="flex flex-col items-center">
-                <span className="lt-text-grey text-center">
-                  Olive Men Jacket
-                </span>
-                <span className="font-semibold">$59</span>
-              </div>
-            </div>
-            <div className="flex flex-col">
-              <div className="flex justify-center items-center for-her-product-card">
-                <img
-                  className=""
-                  src={mjacket}
-                  alt="jacket"
-                  sizes=""
-                  srcSet=""
-                />
-              </div>
-              <div className="flex flex-col items-center">
-                <span className="lt-text-grey text-center">
-                  Olive Men Jacket
-                </span>
-                <span className="font-semibold">$59</span>
-              </div>
-            </div>
-            <div className="flex flex-col">
-              <div className="flex justify-center items-center for-her-product-card">
-                <img
-                  className=""
-                  src={mjacket}
-                  alt="jacket"
-                  sizes=""
-                  srcSet=""
-                />
-              </div>
-              <div className="flex flex-col items-center">
-                <span className="lt-text-grey text-center">
-                  Olive Men Jacket
-                </span>
-                <span className="font-semibold">$59</span>
-              </div>
-            </div>
-            <div className="flex flex-col">
-              <div className="flex justify-center items-center for-her-product-card">
-                <img
-                  className=""
-                  src={mjacket}
-                  alt="jacket"
-                  sizes=""
-                  srcSet=""
-                />
-              </div>
-              <div className="flex flex-col items-center">
-                <span className="lt-text-grey text-center">
-                  Olive Men Jacket
-                </span>
-                <span className="font-semibold">$59</span>
-              </div>
-            </div>
-            <div className="flex flex-col">
-              <div className="flex justify-center items-center for-her-product-card">
-                <img
-                  className=""
-                  src={mjacket}
-                  alt="jacket"
-                  sizes=""
-                  srcSet=""
-                />
-              </div>
-              <div className="flex flex-col items-center">
-                <span className="lt-text-grey text-center">
-                  Olive Men Jacket
-                </span>
-                <span className="font-semibold">$59</span>
-              </div>
-            </div>
-            <div className="flex flex-col">
-              <div className="flex justify-center items-center for-her-product-card">
-                <img
-                  className=""
-                  src={mjacket}
-                  alt="jacket"
-                  sizes=""
-                  srcSet=""
-                />
-              </div>
-              <div className="flex flex-col items-center">
-                <span className="lt-text-grey text-center">
-                  Olive Men Jacket
-                </span>
-                <span className="font-semibold">$59</span>
-              </div>
-            </div>
+            {
+              itemsForHim.map(him => (
+                <ItemCard key={him.id} item={him} />
+              ))
+            }
           </div>
         </div>
         <div className="hidden md:flex md:flex-col justify-end w-1/3">
