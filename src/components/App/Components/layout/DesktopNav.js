@@ -113,9 +113,9 @@ const DesktopNav = ({ auth: { isAuthenticated, isLoading }, logoutUser }) => {
             </Icon>
           </div>
           <Menu
-            id="lang-menu"
+            disableScrollLock={true}
             getContentAnchorEl={null}
-            anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
+            anchorOrigin={{ vertical: "bottom", horizontal: "left" }}
             transformOrigin={{ vertical: "top", horizontal: "center" }}
             anchorEl={langEl}
             keepMounted
@@ -150,12 +150,13 @@ const DesktopNav = ({ auth: { isAuthenticated, isLoading }, logoutUser }) => {
             <Icon className="lt-text-accent lt-icon-lg">account_circle</Icon>
           </div>
           <Menu
+            disableScrollLock={true}
             anchorEl={anchorEl}
             keepMounted
             open={Boolean(anchorEl)}
             onClose={handleClose}
             getContentAnchorEl={null}
-            anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
+            anchorOrigin={{ vertical: "bottom", horizontal: "left" }}
             transformOrigin={{ vertical: "top", horizontal: "center" }}
           >
             {!isLoading && <div>{isAuthenticated ? authLinks : guestLinks}</div>}

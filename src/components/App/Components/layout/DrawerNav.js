@@ -132,13 +132,13 @@ const DrawerNav = ({ auth: { isAuthenticated, isLoading }, logoutUser }) => {
           <Icon className="lt-text-accent lt-icon-base">keyboard_arrow_down</Icon>
         </div>
         <Menu
-          id="lang-menu"
+          disableScrollLock={true}
           anchorEl={langEl}
           keepMounted
           open={Boolean(langEl)}
           onClose={handleLangClose}
           getContentAnchorEl={null}
-          anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
+          anchorOrigin={{ vertical: "bottom", horizontal: "left" }}
           transformOrigin={{ vertical: "top", horizontal: "center" }}
         >
           <MenuItem disabled={state.locale === LOCALES.ENGLISH} onClick={() => handleLanguage(LOCALES.ENGLISH)}>English</MenuItem>
@@ -157,20 +157,21 @@ const DrawerNav = ({ auth: { isAuthenticated, isLoading }, logoutUser }) => {
           <Icon className="lt-text-accent lt-icon-md">account_circle</Icon>
         </div>
         <Menu
+          disableScrollLock={true}
           anchorEl={anchorEl}
           keepMounted
           open={Boolean(anchorEl)}
           getContentAnchorEl={null}
-          anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
+          anchorOrigin={{ vertical: "bottom", horizontal: "left" }}
           transformOrigin={{ vertical: "top", horizontal: "center" }}
           onClose={handleClose}
-          anchorOrigin={{ vertical: "bottom", horizontal: "right" }}
         >
           {!isLoading && <div>{isAuthenticated ? authLinks : guestLinks}</div>}
 
         </Menu>
       </div>
       <Drawer
+        disableScrollLock={true}
         className=""
         anchor={"left"}
         open={drawerState}
