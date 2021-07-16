@@ -9,30 +9,27 @@ import axios from 'axios';
 export default function ItemDetails(props) {
     const [itemPhotos, setItemDetails] = useState([]);
     const { id, category } = useParams();
-
     const getItemDetails = async () => {
         try {
-            const result = await axios.get(base_url + 'api/item/60f0a1da8bc0cd175f7106c9')
+            const result = await axios.get(base_url + 'api/item/' + id)
             setItemDetails(result.data.data.photos);
         } catch (error) {
             console.error(error);
         }
     }
     useEffect(() => {
-        setTimeout(() => {
-            getItemDetails();
-        }, 1000)
+        getItemDetails();
     }, []);
     return (
-        <div className="flex w-full lt-mt-body p-4">
+        <div className="container mx-auto w-full lt-mt-body p-4">
             <div className="w-full md:1/2 lg:w-1/3">
-            <Carousel>
-                {itemPhotos.map(o => (
-                    <div>
-                        <img key={o} src={aws_s3_uri+'/'+o} />
-                    </div>
-                ))}
-            </Carousel>
+                <Carousel className="">
+                    {itemPhotos.map(o => (
+                        <div key={o}>
+                            <img className="" src={aws_s3_uri + '/' + o} alt="productimage" />
+                        </div>
+                    ))}
+                </Carousel>
             </div>
         </div>
     )
