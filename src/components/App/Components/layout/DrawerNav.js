@@ -9,8 +9,19 @@ import Icon from "@material-ui/core/Icon";
 import Menu from "@material-ui/core/Menu";
 import MenuItem from "@material-ui/core/MenuItem";
 import { FormattedMessage } from "react-intl";
-import { NavLink } from "react-router-dom";
-export default function DrawerNav() {
+import { Link, Redirect, NavLink } from "react-router-dom";
+import { logoutUser } from "./../../../../actions/authAction";
+import PropTypes from "prop-types";
+import { connect } from "react-redux";
+
+
+const DrawerNav = ({ auth: { isAuthenticated, isLoading }, logoutUser }) => {
+  const authBag = (
+    <div className="flex items-center justify-around w-16 h-16">
+      <Icon className="lt-text-accent lt-icon-base">shopping_cart</Icon>
+    </div>
+  );
+  const guestBag = <></>;
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [langEl, setLangEl] = React.useState(null);
   const handleClick = (event) => {
@@ -33,6 +44,24 @@ export default function DrawerNav() {
   const handleLangClose = () => {
     setLangEl(null);
   };
+  const logout = () => {
+    handleClose();
+    logoutUser();
+  }
+  const authLinks = (
+    <>
+      <MenuItem onClick={handleClose}>Profile</MenuItem>
+      <MenuItem onClick={handleClose}>My account</MenuItem>
+      <MenuItem onClick={logout}>Logout</MenuItem>
+    </>
+  );
+  const guestLinks = (
+    <>
+      <MenuItem onClick={handleClose}>
+        <Link to="/auth/login">Login</Link>
+      </MenuItem>
+    </>
+  );
   const [drawerState, setState] = React.useState(false);
   const { state, dispatch } = useContext(AppContext)
 
@@ -108,15 +137,19 @@ export default function DrawerNav() {
           keepMounted
           open={Boolean(langEl)}
           onClose={handleLangClose}
-          anchorOrigin={{ vertical: "bottom", horizontal: "bottom" }}
+          getContentAnchorEl={null}
+          anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
+          transformOrigin={{ vertical: "top", horizontal: "center" }}
         >
           <MenuItem disabled={state.locale === LOCALES.ENGLISH} onClick={() => handleLanguage(LOCALES.ENGLISH)}>English</MenuItem>
           <MenuItem disabled={state.locale === LOCALES.HINDI} onClick={() => handleLanguage(LOCALES.HINDI)}>Hindi</MenuItem>
           <MenuItem disabled={state.locale === LOCALES.SPANISH} onClick={() => handleLanguage(LOCALES.SPANISH)}>Spanish</MenuItem>
         </Menu>
-        <div className="flex items-center justify-around w-12 h-12">
+        {!isLoading && <div>{isAuthenticated ? authBag : guestBag}</div>}
+
+        {/* <div className="flex items-center justify-around w-12 h-12">
           <Icon className="lt-text-accent lt-icon-base">shopping_cart</Icon>
-        </div>
+        </div> */}
         <div
           className="flex items-center justify-around w-12 h-12"
           onClick={handleClick}
@@ -124,16 +157,17 @@ export default function DrawerNav() {
           <Icon className="lt-text-accent lt-icon-md">account_circle</Icon>
         </div>
         <Menu
-          id="simple-menu"
           anchorEl={anchorEl}
           keepMounted
           open={Boolean(anchorEl)}
+          getContentAnchorEl={null}
+          anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
+          transformOrigin={{ vertical: "top", horizontal: "center" }}
           onClose={handleClose}
           anchorOrigin={{ vertical: "bottom", horizontal: "right" }}
         >
-          <MenuItem onClick={handleClose}>Profile</MenuItem>
-          <MenuItem onClick={handleClose}>My account</MenuItem>
-          <MenuItem onClick={handleClose}>Logout</MenuItem>
+          {!isLoading && <div>{isAuthenticated ? authLinks : guestLinks}</div>}
+
         </Menu>
       </div>
       <Drawer
@@ -154,3 +188,12 @@ export default function DrawerNav() {
     </div>
   );
 }
+DrawerNav.propTypes = {
+  logoutUser: PropTypes.func.isRequired,
+  auth: PropTypes.object.isRequired,
+};
+
+const mapStateToProps = (state) => ({
+  auth: state.auth,
+});
+export default connect(mapStateToProps, { logoutUser })(DrawerNav);

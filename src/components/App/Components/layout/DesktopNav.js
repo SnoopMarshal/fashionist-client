@@ -114,11 +114,13 @@ const DesktopNav = ({ auth: { isAuthenticated, isLoading }, logoutUser }) => {
           </div>
           <Menu
             id="lang-menu"
+            getContentAnchorEl={null}
+            anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
+            transformOrigin={{ vertical: "top", horizontal: "center" }}
             anchorEl={langEl}
             keepMounted
             open={Boolean(langEl)}
             onClose={handleLangClose}
-            anchorOrigin={{ vertical: "bottom", horizontal: "bottom" }}
           >
             <MenuItem
               disabled={state.locale === LOCALES.ENGLISH}
@@ -148,17 +150,15 @@ const DesktopNav = ({ auth: { isAuthenticated, isLoading }, logoutUser }) => {
             <Icon className="lt-text-accent lt-icon-lg">account_circle</Icon>
           </div>
           <Menu
-            id="simple-menu"
             anchorEl={anchorEl}
             keepMounted
             open={Boolean(anchorEl)}
             onClose={handleClose}
-            anchorOrigin={{ vertical: "bottom", horizontal: "right" }}
+            getContentAnchorEl={null}
+            anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
+            transformOrigin={{ vertical: "top", horizontal: "center" }}
           >
             {!isLoading && <div>{isAuthenticated ? authLinks : guestLinks}</div>}
-            {/* <MenuItem onClick={handleClose}>Profile</MenuItem>
-            <MenuItem onClick={handleClose}>My account</MenuItem>
-            <MenuItem onClick={handleClose}>Logout</MenuItem> */}
           </Menu>
         </div>
       </div>
