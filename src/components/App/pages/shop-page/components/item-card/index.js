@@ -10,6 +10,10 @@ const ItemCard = (props) => {
     console.log(e);
     e.stopPropagation();
   }
+  const shareItem = e => {
+    console.log(e);
+    e.stopPropagation();
+  }
   return (
     <div className="h-full flex flex-col justify-between rounded-b-md mb-1">
       <Link to={`${props.item.categoryId}/${props.item._id}`}>
@@ -33,8 +37,8 @@ const ItemCard = (props) => {
         <IconButton aria-label="add to favorites" onClick={addToFavorite}>
           <Icon className="lt-text-accent lt-icon-sm text-gray-400">favorite</Icon>
         </IconButton>
-        <IconButton aria-label="share">
-          <Icon className="lt-text-accent lt-icon-sm" onClick={addToFavorite}>share</Icon>
+        <IconButton aria-label="share" onClick={shareItem}>
+          <Icon className="lt-text-accent lt-icon-sm" >share</Icon>
         </IconButton>
       </div>
     </div>

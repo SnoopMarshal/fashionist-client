@@ -12,14 +12,14 @@ export default function ItemDetails(props) {
     const getItemDetails = async () => {
         try {
             const result = await axios.get(base_url + 'api/item/' + id)
-            setItemDetails(result.data.data.photos);
+            setItemDetails(result.data.photos);
         } catch (error) {
             console.error(error);
         }
     }
     useEffect(() => {
         getItemDetails();
-    }, []);
+    });
     return (
         <div className="container mx-auto w-full lt-mt-body p-4">
             <div className="w-full md:1/2 lg:w-1/3">
