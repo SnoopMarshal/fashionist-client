@@ -22,7 +22,6 @@ export default function Home() {
       const response = await axios.get(
         "https://fakestoreapi.com/products?limit=5"
       );
-      setBannerItems(response.data);
     } catch (error) {
       console.log(error);
     }
@@ -72,7 +71,6 @@ export default function Home() {
         image: mjacket
       }]
       setForHimItems(himItems);
-      console.log(itemsForHim);
     } catch (error) {
       console.log(error);
     }

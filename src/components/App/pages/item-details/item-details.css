@@ -1,0 +1,8 @@
+.buy-now-button{
+    background: rgb(248,248,248);
+    background: linear-gradient(
+    90deg,
+    rgba(205, 215, 214, 1) 0%,
+    rgba(235, 218, 211, 1) 50%
+  );
+}
