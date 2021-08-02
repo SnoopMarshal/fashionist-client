@@ -6,7 +6,6 @@ import { FormattedMessage } from "react-intl";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { registerUser } from "./../../../../actions/authAction";
-import classnames from "classnames";
 
 const Register = (props) => {
   const [error, setError] = useState({});
@@ -30,8 +29,8 @@ const Register = (props) => {
     props.registerUser(newUser, props.history);
   };
   return (
-    <div className="w-screen h-screen flex justify-center items-center px-2">
-      <div className="lt-bg-primary rounded-md shadow-md w-full md:w-2/3 lg:w-1/3 xl:w-1/4">
+    <div className="w-full h-full flex justify-center items-center">
+      <div className="lt-bg-primary w-full">
         <div className="flex items-center justify-center h-16 w-full">
           <img src={logo} alt="logo" />
         </div>

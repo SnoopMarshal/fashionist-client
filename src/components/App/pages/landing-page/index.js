@@ -1,6 +1,5 @@
 import React from "react";
 import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
-import Skeleton from "@material-ui/lab/Skeleton";
 import women from "./../../../../assets/images/women.png";
 import forher from "./../../../../assets/images/for-her.png";
 import wjacket from "./../../../../assets/images/for-her-jacket.png";
@@ -8,24 +7,10 @@ import forhim from "./../../../../assets/images/for-him.png";
 import mjacket from "./../../../../assets/images/for-him-jacket.png";
 import heels from "./../../../../assets/images/heels.png";
 import specs from "./../../../../assets/images/specs.png";
-import axios from "axios";
 import ItemCard from "./components/item-card";
 export default function Home() {
-  const bannerHeight = window.innerHeight * 0.4;
-  const [bannerItems, setBannerItems] = React.useState([]);
   const [itemsForHer, setForHerItems] = React.useState([]);
   const [itemsForHim, setForHimItems] = React.useState([]);
-  const [itemsJewelery, setJeweleryItems] = React.useState([]);
-  const [itemsElectronics, setElectronicsItems] = React.useState([]);
-  const getBannerItems = async () => {
-    try {
-      const response = await axios.get(
-        "https://fakestoreapi.com/products?limit=5"
-      );
-    } catch (error) {
-      console.log(error);
-    }
-  };
   const getItemsForHim = async () => {
     try {
       const himItems = [{
@@ -124,32 +109,9 @@ export default function Home() {
       console.log(error);
     }
   };
-  const getItemsJewelery = async () => {
-    try {
-      const response = await axios.get(
-        "https://fakestoreapi.com/products/category/jewelery?limit=8"
-      );
-      setJeweleryItems(response.data);
-    } catch (error) {
-      console.log(error);
-    }
-  };
-  const getItemsElectronics = async () => {
-    try {
-      const response = await axios.get(
-        "https://fakestoreapi.com/products/category/electronics?limit=8"
-      );
-      setElectronicsItems(response.data);
-    } catch (error) {
-      console.log(error);
-    }
-  };
   React.useEffect(() => {
-    getBannerItems();
     getItemsForHer();
     getItemsForHim();
-    getItemsJewelery();
-    getItemsElectronics();
   }, []);
   return (
     <>

@@ -1,50 +1,45 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { AppContext } from "../../../Context";
 import { LOCALES } from "./../../../i18n/constants";
 import logo from "./../../../../assets/logo/fashionist.png";
 import Icon from "@material-ui/core/Icon";
 import { Link, NavLink, Redirect } from "react-router-dom";
 import Menu from "@material-ui/core/Menu";
+import Drawer from '@material-ui/core/Drawer';
 import MenuItem from "@material-ui/core/MenuItem";
 import { FormattedMessage } from "react-intl";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { logoutUser } from "./../../../../actions/authAction";
+import Login from "../auth/Login";
+import Signup from "../auth/Signup";
+import './desktop.css';
 const DesktopNav = ({ auth: { isAuthenticated, isLoading }, logoutUser }) => {
-  const handleClick = (event) => {
-    setAnchorEl(event.currentTarget);
-  };
-  const handleClose = () => {
-    setAnchorEl(null);
-  };
+  const [rightDrawerOpen, setRightDrawer] = useState(false);
   const handleLangClose = () => {
     setLangEl(null);
   };
   const logout = () => {
-    handleClose();
     logoutUser();
   }
   const authLinks = (
-    <>
-      <MenuItem onClick={handleClose}>Profile</MenuItem>
-      <MenuItem onClick={handleClose}>My account</MenuItem>
+    <div className="lt-bg-primary h-screen right-drawer">
+      <MenuItem onClick={() => setRightDrawer(false)}>Profile</MenuItem>
+      <MenuItem onClick={() => setRightDrawer(false)}>My account</MenuItem>
       <MenuItem onClick={logout}>Logout</MenuItem>
-    </>
+    </div>
   );
   const guestLinks = (
-    <>
-      <MenuItem onClick={handleClose}>
-        <Link to="/auth/login">Login</Link>
-      </MenuItem>
-    </>
+    <div className="lt-bg-primary right-drawer h-screen">
+      {/* <Login/> */}
+      <Signup/>
+    </div>
   );
   const authBag = (
     <div className="flex items-center justify-around w-16 h-16">
       <Icon className="lt-text-accent lt-icon-base">shopping_cart</Icon>
     </div>
   );
-  const guestBag = <></>;
-  const [anchorEl, setAnchorEl] = React.useState(null);
   const [langEl, setLangEl] = React.useState(null);
   const handleLanguageMenu = (event) => {
     setLangEl(event.currentTarget);
@@ -57,6 +52,12 @@ const DesktopNav = ({ auth: { isAuthenticated, isLoading }, logoutUser }) => {
     });
   };
   const { state, dispatch } = useContext(AppContext);
+  const openRightMenu =  (open) => (event) => {
+    if (event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) {
+      return;
+    }
+    setRightDrawer(open);
+  };
   return (
     <div className="fixed w-full lt-header top-0 flex justify-between items-center lt-bg-primary z-10">
       <div className="flex items-center justify-between w-full">
@@ -134,33 +135,18 @@ const DesktopNav = ({ auth: { isAuthenticated, isLoading }, logoutUser }) => {
             >
               <FormattedMessage id="hindi" />
             </MenuItem>
-            <MenuItem
-              disabled={state.locale === LOCALES.SPANISH}
-              onClick={() => handleLanguage(LOCALES.SPANISH)}
-            >
-              <FormattedMessage id="spanish" />
-            </MenuItem>
           </Menu>
 
-          {!isLoading && <div>{isAuthenticated ? authBag : guestBag}</div>}
+          {!isLoading && <div>{isAuthenticated &&  authBag}</div>}
           <div
             className="flex items-center justify-around w-16 h-16"
-            onClick={handleClick}
+            onClick={openRightMenu(true)}
           >
             <Icon className="lt-text-accent lt-icon-lg">account_circle</Icon>
           </div>
-          <Menu
-            disableScrollLock={true}
-            anchorEl={anchorEl}
-            keepMounted
-            open={Boolean(anchorEl)}
-            onClose={handleClose}
-            getContentAnchorEl={null}
-            anchorOrigin={{ vertical: "bottom", horizontal: "left" }}
-            transformOrigin={{ vertical: "top", horizontal: "center" }}
-          >
-            {!isLoading && <div>{isAuthenticated ? authLinks : guestLinks}</div>}
-          </Menu>
+          <Drawer anchor={"right"} open={rightDrawerOpen} onClose={() => setRightDrawer(false)} disableScrollLock={true}>
+            {isAuthenticated ? authLinks : guestLinks}
+          </Drawer>
         </div>
       </div>
     </div>

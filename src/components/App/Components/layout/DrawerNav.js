@@ -4,7 +4,7 @@ import { LOCALES } from "./../../../i18n/constants"
 import Drawer from "@material-ui/core/Drawer";
 import ListItem from "@material-ui/core/ListItem";
 import List from "@material-ui/core/List";
-import logo from "./../../../../assets/logo/lt-logo.png";
+import logo from "./../../../../assets/logo/fashionist.png";
 import Icon from "@material-ui/core/Icon";
 import Menu from "@material-ui/core/Menu";
 import MenuItem from "@material-ui/core/MenuItem";
@@ -21,7 +21,6 @@ const DrawerNav = ({ auth: { isAuthenticated, isLoading }, logoutUser }) => {
       <Icon className="lt-text-accent lt-icon-base">shopping_cart</Icon>
     </div>
   );
-  const guestBag = <></>;
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [langEl, setLangEl] = React.useState(null);
   const handleClick = (event) => {
@@ -118,9 +117,9 @@ const DrawerNav = ({ auth: { isAuthenticated, isLoading }, logoutUser }) => {
     <div className="fixed w-full lt-header-mobile top-0 flex justify-between items-center lt-bg-primary p-4 z-10">
       <div className="flex items-center" onClick={toggleDrawer(true)}>
         <Icon className="lt-text-accent">menu</Icon>
-        <div className="pl-2">
-          <span className="font-bold lt-text-accent">Little Tags</span>
-        </div>
+        <div className="flex items-center h-12 w-auto pl-4">
+            <img src={logo} alt="logo" />
+          </div>
       </div>
       <div className="flex items-center">
         <div
@@ -143,9 +142,9 @@ const DrawerNav = ({ auth: { isAuthenticated, isLoading }, logoutUser }) => {
         >
           <MenuItem disabled={state.locale === LOCALES.ENGLISH} onClick={() => handleLanguage(LOCALES.ENGLISH)}>English</MenuItem>
           <MenuItem disabled={state.locale === LOCALES.HINDI} onClick={() => handleLanguage(LOCALES.HINDI)}>Hindi</MenuItem>
-          <MenuItem disabled={state.locale === LOCALES.SPANISH} onClick={() => handleLanguage(LOCALES.SPANISH)}>Spanish</MenuItem>
+          {/* <MenuItem disabled={state.locale === LOCALES.SPANISH} onClick={() => handleLanguage(LOCALES.SPANISH)}>Spanish</MenuItem> */}
         </Menu>
-        {!isLoading && <div>{isAuthenticated ? authBag : guestBag}</div>}
+        {!isLoading && <div>{isAuthenticated && authBag}</div>}
 
         {/* <div className="flex items-center justify-around w-12 h-12">
           <Icon className="lt-text-accent lt-icon-base">shopping_cart</Icon>
