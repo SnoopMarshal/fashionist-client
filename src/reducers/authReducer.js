@@ -1,4 +1,4 @@
-import { SET_CURRENT_USER, USER_LOADING, LOGOUT } from "./../actions/types";
+import { SET_CURRENT_USER, USER_LOADING, LOGOUT, USER_REGISTER } from "./../actions/types";
 
 const isEmpty = require("is-empty");
 
@@ -6,6 +6,7 @@ const initialState = {
   isAuthenticated: false,
   user: {},
   isLoading: false,
+  isRegistered: false
 };
 
 // eslint-disable-next-line import/no-anonymous-default-export
@@ -16,6 +17,11 @@ export default function (state = initialState, action) {
         ...state,
         isAuthenticated: !isEmpty(action.payload),
         user: action.payload,
+      };
+    case USER_REGISTER:
+      return {
+        ...state,
+        isRegistered: true
       };
     case USER_LOADING:
       return {

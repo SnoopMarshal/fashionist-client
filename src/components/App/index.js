@@ -7,6 +7,7 @@ import Sale from "./Components/sale-page/Sale";
 import About from "./Components/about-page/About";
 import Footer from "./Components/layout/Footer";
 import Login from "./Components/auth/Login";
+import Contact from "./pages/contact-us";
 import firebase from "firebase/app";
 import "firebase/auth";
 import Register from "./Components/auth/Signup";
@@ -32,6 +33,7 @@ function App() {
             <Route path="/shop/:category/:id" exact component={ItemDetails} />
             <Route path="/sale" exact component={Sale} />
             <Route path="/about" exact component={About} />
+            <Route path="/contact" exact component={Contact} />
           </Switch>
           {/* <Footer/> */}
         </Router>

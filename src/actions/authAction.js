@@ -4,12 +4,16 @@ import jwt_decode from "jwt-decode";import {
   GET_ERRORS,
   SET_CURRENT_USER,
   USER_LOADING,
-  LOGOUT
+  LOGOUT,
+  USER_REGISTER
 } from "./types";// Register User
-export const registerUser = (userData, history) => dispatch => {
+
+export const registerUser = userData => dispatch => {
   axios
     .post("/api/users/register", userData)
-    .then(res => history.push("/auth/login")) // re-direct to login on successful register
+    .then(res => {
+      dispatch(setSignUpState())
+    }) // re-direct to login on successful register
     .catch(err =>
       dispatch({
         type: GET_ERRORS,
@@ -45,7 +49,14 @@ export const setCurrentUser = decoded => {
     type: SET_CURRENT_USER,
     payload: decoded
   };
-};// User loading
+};
+// set user as registered
+export const setSignUpState = () => {
+    return {
+      type: USER_REGISTER
+    }
+}
+// User loading
 export const setUserLoading = () => {
   return {
     type: USER_LOADING

@@ -14,6 +14,7 @@ export default {
     hi: "हि",
     es: "ES",
     login: "लॉग इन करें",
-    signup: "साइन इन करें"
+    signup: "साइन इन करें",
+    contact: "contact us"
   },
 };

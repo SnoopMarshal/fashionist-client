@@ -3,7 +3,7 @@ import { AppContext } from "../../../Context";
 import { LOCALES } from "./../../../i18n/constants";
 import logo from "./../../../../assets/logo/fashionist.png";
 import Icon from "@material-ui/core/Icon";
-import { Link, NavLink, Redirect } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import Menu from "@material-ui/core/Menu";
 import Drawer from '@material-ui/core/Drawer';
 import MenuItem from "@material-ui/core/MenuItem";
@@ -14,7 +14,7 @@ import { logoutUser } from "./../../../../actions/authAction";
 import Login from "../auth/Login";
 import Signup from "../auth/Signup";
 import './desktop.css';
-const DesktopNav = ({ auth: { isAuthenticated, isLoading }, logoutUser }) => {
+const DesktopNav = ({ auth: { isAuthenticated, isLoading, isRegistered }, logoutUser }) => {
   const [rightDrawerOpen, setRightDrawer] = useState(false);
   const handleLangClose = () => {
     setLangEl(null);
@@ -32,7 +32,7 @@ const DesktopNav = ({ auth: { isAuthenticated, isLoading }, logoutUser }) => {
   const guestLinks = (
     <div className="lt-bg-primary right-drawer h-screen">
       {/* <Login/> */}
-      <Signup/>
+      {isRegistered ? <Login/> : <Signup/>}
     </div>
   );
   const authBag = (
@@ -98,6 +98,14 @@ const DesktopNav = ({ auth: { isAuthenticated, isLoading }, logoutUser }) => {
             >
               <FormattedMessage id="sale" />
             </NavLink>
+            <NavLink
+              to="/contact"
+              exact
+              className="font-semibold mx-4 uppercase lt-text-accent"
+              activeClassName="border-b-2 border-gray-700 lt-text-primary"
+            >
+              <FormattedMessage id="contact" />
+            </NavLink>
           </div>
         </div>
         <div className="flex items-center">
@@ -155,10 +163,10 @@ const DesktopNav = ({ auth: { isAuthenticated, isLoading }, logoutUser }) => {
 
 DesktopNav.propTypes = {
   logoutUser: PropTypes.func.isRequired,
-  auth: PropTypes.object.isRequired,
+  auth: PropTypes.object.isRequired
 };
 
-const mapStateToProps = (state) => ({
-  auth: state.auth,
+const mapStateToProps = (state) => ( {
+  auth: state.auth
 });
 export default connect(mapStateToProps, { logoutUser })(DesktopNav);
