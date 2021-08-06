@@ -5,7 +5,7 @@ import logo from "./../../../../assets/logo/fashionist.png";
 import { FormattedMessage } from "react-intl";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import { loginUser } from "./../../../../actions/authAction";
+import { loginUser } from "./../../../../redux/actions/authAction";
 const Login = (props) => {
   const [error, setError] = useState({});
 

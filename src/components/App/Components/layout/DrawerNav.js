@@ -10,7 +10,7 @@ import Menu from "@material-ui/core/Menu";
 import MenuItem from "@material-ui/core/MenuItem";
 import { FormattedMessage } from "react-intl";
 import { Link, Redirect, NavLink } from "react-router-dom";
-import { logoutUser } from "./../../../../actions/authAction";
+import { logoutUser } from "./../../../../redux/actions/authAction";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 

@@ -5,7 +5,7 @@ import logo from "./../../../../assets/logo/fashionist.png";
 import { FormattedMessage } from "react-intl";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import { registerUser } from "./../../../../actions/authAction";
+import { registerUser } from "./../../../../redux/actions/authAction";
 
 const Register = (props) => {
   const [error, setError] = useState({});

@@ -6,3 +6,6 @@
     rgba(235, 218, 211, 1) 50%
   );
 }
+.lottie-rotate{
+  transform: rotate(90deg);
+}

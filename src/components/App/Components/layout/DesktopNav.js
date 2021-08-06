@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import { AppContext } from "../../../Context";
 import { LOCALES } from "./../../../i18n/constants";
 import logo from "./../../../../assets/logo/fashionist.png";
@@ -10,11 +10,16 @@ import MenuItem from "@material-ui/core/MenuItem";
 import { FormattedMessage } from "react-intl";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import { logoutUser } from "./../../../../actions/authAction";
+import { logoutUser } from ".//../../../../redux/actions/authAction";
 import Login from "../auth/Login";
 import Signup from "../auth/Signup";
+import Badge from '@material-ui/core/Badge';
+import Popover from '@material-ui/core/Popover';
+import Typography from '@material-ui/core/Typography';
 import './desktop.css';
-const DesktopNav = ({ auth: { isAuthenticated, isLoading, isRegistered }, logoutUser }) => {
+import { setWishList } from "../../../../redux/actions/wishlistAction";
+import ShoppingCartMenu from "../../pages/shopping-cart/components/shopping-cart-menu";
+const DesktopNav = ({ auth: { isAuthenticated, isLoading, isRegistered }, logoutUser, shop:{cart} }) => {
   const [rightDrawerOpen, setRightDrawer] = useState(false);
   const handleLangClose = () => {
     setLangEl(null);
@@ -22,6 +27,25 @@ const DesktopNav = ({ auth: { isAuthenticated, isLoading, isRegistered }, logout
   const logout = () => {
     logoutUser();
   }
+  // popover
+  // const classes = useStyles();
+  const [anchorEl, setAnchorEl] = useState(null);
+  const [cartItems, setCart] = useState(0);
+
+  const handleClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+
+  const open = Boolean(anchorEl);
+  const id = open ? 'simple-popover' : undefined;
+  const getCartItems = () => {
+    setCart(cart.length)
+  }
+  // popover end
   const authLinks = (
     <div className="lt-bg-primary h-screen right-drawer">
       <MenuItem onClick={() => setRightDrawer(false)}>Profile</MenuItem>
@@ -32,14 +56,41 @@ const DesktopNav = ({ auth: { isAuthenticated, isLoading, isRegistered }, logout
   const guestLinks = (
     <div className="lt-bg-primary right-drawer h-screen">
       {/* <Login/> */}
-      {isRegistered ? <Login/> : <Signup/>}
+      {isRegistered ? <Login/> : <Login/>}
     </div>
   );
   const authBag = (
     <div className="flex items-center justify-around w-16 h-16">
-      <Icon className="lt-text-accent lt-icon-base">shopping_cart</Icon>
+      <Badge badgeContent={cartItems} color="primary">
+      <Icon className="lt-text-accent lt-icon-base" onClick={handleClick}>shopping_cart</Icon>
+        {/* <MailIcon /> */}
+      </Badge>
+      {/* <Button aria-describedby={id} variant="contained" color="primary" onClick={handleClick}>
+        Open Popover
+      </Button> */}
+      <Popover
+        id={id}
+        open={open}
+        anchorEl={anchorEl}
+        onClose={handleClose}
+        anchorOrigin={{
+          vertical: 'bottom',
+          horizontal: 'center',
+        }}
+        transformOrigin={{
+          vertical: 'top',
+          horizontal: 'center',
+        }}
+      >
+        <ShoppingCartMenu/>
+      </Popover>
     </div>
   );
+  const wishList = (
+    <div className="flex items-center justify-around w-16 h-16">
+      <Icon style={{ color: '#fc466b' }} className="lt-text-accent lt-icon-base">favorite</Icon>
+    </div>
+  )
   const [langEl, setLangEl] = React.useState(null);
   const handleLanguageMenu = (event) => {
     setLangEl(event.currentTarget);
@@ -58,6 +109,11 @@ const DesktopNav = ({ auth: { isAuthenticated, isLoading, isRegistered }, logout
     }
     setRightDrawer(open);
   };
+
+  useEffect(() => {
+    getCartItems();
+  }, [cart]);
+  
   return (
     <div className="fixed w-full lt-header top-0 flex justify-between items-center lt-bg-primary z-10">
       <div className="flex items-center justify-between w-full">
@@ -109,42 +165,7 @@ const DesktopNav = ({ auth: { isAuthenticated, isLoading, isRegistered }, logout
           </div>
         </div>
         <div className="flex items-center">
-          <div
-            className="flex items-center justify-around ml-4"
-            onClick={handleLanguageMenu}
-          >
-            <Icon className="lt-text-accent lt-icon-base">translate</Icon>
-            <span className="font-semibold lt-text-accent">
-              <FormattedMessage id={state.locale} />
-            </span>
-            <Icon className="lt-text-accent lt-icon-base">
-              keyboard_arrow_down
-            </Icon>
-          </div>
-          <Menu
-            disableScrollLock={true}
-            getContentAnchorEl={null}
-            anchorOrigin={{ vertical: "bottom", horizontal: "left" }}
-            transformOrigin={{ vertical: "top", horizontal: "center" }}
-            anchorEl={langEl}
-            keepMounted
-            open={Boolean(langEl)}
-            onClose={handleLangClose}
-          >
-            <MenuItem
-              disabled={state.locale === LOCALES.ENGLISH}
-              onClick={() => handleLanguage(LOCALES.ENGLISH)}
-            >
-              <FormattedMessage id="english" />
-            </MenuItem>
-            <MenuItem
-              disabled={state.locale === LOCALES.HINDI}
-              onClick={() => handleLanguage(LOCALES.HINDI)}
-            >
-              <FormattedMessage id="hindi" />
-            </MenuItem>
-          </Menu>
-
+          {!isLoading && <div>{isAuthenticated &&  wishList}</div>}
           {!isLoading && <div>{isAuthenticated &&  authBag}</div>}
           <div
             className="flex items-center justify-around w-16 h-16"
@@ -167,6 +188,7 @@ DesktopNav.propTypes = {
 };
 
 const mapStateToProps = (state) => ( {
-  auth: state.auth
+  auth: state.auth,
+  shop: state.shop
 });
 export default connect(mapStateToProps, { logoutUser })(DesktopNav);

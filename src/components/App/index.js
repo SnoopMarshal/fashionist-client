@@ -15,7 +15,7 @@ import { Provider } from "react-redux";
 import { useMediaQuery, useTheme } from "@material-ui/core";
 import DrawerNav from "./Components/layout/DrawerNav";
 import DesktopNav from "./Components/layout/DesktopNav";
-import store from "./../../store";
+import store from "./../../redux/store";
 import ItemDetails from "./pages/item-details";
 function App() {
   const theme = useTheme();
