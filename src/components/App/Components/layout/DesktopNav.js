@@ -55,7 +55,6 @@ const DesktopNav = ({ auth: { isAuthenticated, isLoading, isRegistered }, logout
   );
   const guestLinks = (
     <div className="lt-bg-primary right-drawer h-screen">
-      {/* <Login/> */}
       {isRegistered ? <Login/> : <Login/>}
     </div>
   );
@@ -63,11 +62,7 @@ const DesktopNav = ({ auth: { isAuthenticated, isLoading, isRegistered }, logout
     <div className="flex items-center justify-around w-16 h-16">
       <Badge badgeContent={cartItems} color="primary">
       <Icon className="lt-text-accent lt-icon-base" onClick={handleClick}>shopping_cart</Icon>
-        {/* <MailIcon /> */}
       </Badge>
-      {/* <Button aria-describedby={id} variant="contained" color="primary" onClick={handleClick}>
-        Open Popover
-      </Button> */}
       <Popover
         id={id}
         open={open}
