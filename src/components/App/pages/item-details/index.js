@@ -32,7 +32,7 @@ const ItemDetails = ({ auth: { isAuthenticated, isLoading, isRegistered }, setWi
     }
     const checkIsCartItem = () => {
         const cartMap = new Set(cart.map(o => o._id));
-        setToCartItem(cartMap.has(item._id))
+        setToCartItem(cartMap.has(item?._id))
     }
     const addToFavorite = item => {
         setWishList(item)
@@ -57,7 +57,7 @@ const ItemDetails = ({ auth: { isAuthenticated, isLoading, isRegistered }, setWi
     }, [wishlist]);
     useEffect(() => {
         checkIsCartItem();
-    }, [cart]);
+    }, [cart, item]);
     useEffect(() => {
         const source = axios.CancelToken.source()
         getItemDetails(source)
@@ -66,10 +66,9 @@ const ItemDetails = ({ auth: { isAuthenticated, isLoading, isRegistered }, setWi
         }
     }, []);
     return (
-        <div className="lg:container lg:mx-auto w-full lt-mt-body p-4">
-            {isWishListedItem ? 'true' : 'false'}  {isCartItem ? 'true' : 'false'}
+        <div className="lg:container lg:mx-auto flex flex-col md:flex-row w-full lt-mt-body p-4">
             <div className="w-full md:w-1/2 lg:w-1/3">
-                <Carousel className="">
+                <Carousel className="w-full">
                     {item?.photos?.map(o => (
                         <div key={o}>
                             <img className="" src={aws_s3_uri + '/' + o} alt="productimage" />
@@ -96,6 +95,20 @@ const ItemDetails = ({ auth: { isAuthenticated, isLoading, isRegistered }, setWi
                         </div>
                     </div>
                 }
+            </div>
+            <div className="w-full md:w-1/2 lg:w-2/3 md:px-4 mt-4 md:mt-0">
+                <div>
+                <span className="text-xl md:text-2xl lg:text-4xl font-bold">{item.name}</span>
+                </div>
+                <div className="chip-category mt-4">
+                    <span className="rounded-full border border-pink-600 text-pink-400 px-2 py-1">{item?.categoryId?.name}</span>
+                </div>
+                <div className="description mt-4">
+                    <p className="text-gray-500">{item.description}</p>
+                </div>
+                <div className="w-full price mt-4">
+                    <span className="text-xl font-semibold md:text-2xl">&#8377;</span> <span className="text-xl font-semibold md:text-2xl">{item.price}</span>
+                </div>
             </div>
         </div>
     )

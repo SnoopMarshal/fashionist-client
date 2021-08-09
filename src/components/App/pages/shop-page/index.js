@@ -29,7 +29,7 @@ export default function Shop() {
     }, [])
     return (
         <div className="container mx-auto flex w-full lt-mt-body">
-            <div className="grid grid-cols-3 lg:grid-cols-5 gap-4 p-4">
+            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 p-4">
                 {
                     item.map(p => (
                         <ItemCard key={p._id} item={p} />

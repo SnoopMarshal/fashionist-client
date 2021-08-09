@@ -4,7 +4,6 @@ import { LOCALES } from "./../../../i18n/constants";
 import logo from "./../../../../assets/logo/fashionist.png";
 import Icon from "@material-ui/core/Icon";
 import { NavLink } from "react-router-dom";
-import Menu from "@material-ui/core/Menu";
 import Drawer from '@material-ui/core/Drawer';
 import MenuItem from "@material-ui/core/MenuItem";
 import { FormattedMessage } from "react-intl";
@@ -15,9 +14,7 @@ import Login from "../auth/Login";
 import Signup from "../auth/Signup";
 import Badge from '@material-ui/core/Badge';
 import Popover from '@material-ui/core/Popover';
-import Typography from '@material-ui/core/Typography';
 import './desktop.css';
-import { setWishList } from "../../../../redux/actions/wishlistAction";
 import ShoppingCartMenu from "../../pages/shopping-cart/components/shopping-cart-menu";
 const DesktopNav = ({ auth: { isAuthenticated, isLoading, isRegistered }, logoutUser, shop:{cart} }) => {
   const [rightDrawerOpen, setRightDrawer] = useState(false);
@@ -28,7 +25,6 @@ const DesktopNav = ({ auth: { isAuthenticated, isLoading, isRegistered }, logout
     logoutUser();
   }
   // popover
-  // const classes = useStyles();
   const [anchorEl, setAnchorEl] = useState(null);
   const [cartItems, setCart] = useState(0);
 
@@ -67,6 +63,7 @@ const DesktopNav = ({ auth: { isAuthenticated, isLoading, isRegistered }, logout
         id={id}
         open={open}
         anchorEl={anchorEl}
+        disableScrollLock={true}
         onClose={handleClose}
         anchorOrigin={{
           vertical: 'bottom',

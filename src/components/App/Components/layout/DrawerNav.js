@@ -1,9 +1,12 @@
-import React, { useContext } from 'react'
+import React, { useContext, useState, useEffect } from 'react'
 import { AppContext } from '../../../Context';
 import { LOCALES } from "./../../../i18n/constants"
 import Drawer from "@material-ui/core/Drawer";
 import ListItem from "@material-ui/core/ListItem";
 import List from "@material-ui/core/List";
+import Badge from '@material-ui/core/Badge';
+import Popover from '@material-ui/core/Popover';
+import './desktop.css';
 import logo from "./../../../../assets/logo/fashionist.png";
 import Icon from "@material-ui/core/Icon";
 import Menu from "@material-ui/core/Menu";
@@ -13,36 +16,55 @@ import { Link, Redirect, NavLink } from "react-router-dom";
 import { logoutUser } from "./../../../../redux/actions/authAction";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
+import Login from "../auth/Login";
+import ShoppingCartMenu from "../../pages/shopping-cart/components/shopping-cart-menu";
 
+const DrawerNav = ({ auth: { isAuthenticated, isLoading, isRegistered }, logoutUser, shop: {cart} }) => {
+  const [anchorEl, setAnchorEl] = useState(null);
+  const [cartItems, setCart] = useState(0);
 
-const DrawerNav = ({ auth: { isAuthenticated, isLoading }, logoutUser }) => {
-  const authBag = (
-    <div className="flex items-center justify-around w-16 h-16">
-      <Icon className="lt-text-accent lt-icon-base">shopping_cart</Icon>
-    </div>
-  );
-  const [anchorEl, setAnchorEl] = React.useState(null);
-  const [langEl, setLangEl] = React.useState(null);
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
-  };
-  const handleLanguageMenu = (event) => {
-    setLangEl(event.currentTarget)
-  }
-  const handleLanguage = (locale) => {
-    setLangEl(null);
-    dispatch({
-      type: 'setLocale',
-      locale
-    })
   };
 
   const handleClose = () => {
     setAnchorEl(null);
   };
-  const handleLangClose = () => {
-    setLangEl(null);
-  };
+
+  const open = Boolean(anchorEl);
+  const id = open ? 'simple-popover' : undefined;
+  const getCartItems = () => {
+    setCart(cart.length)
+  }
+
+  const authBag = (
+    <div className="flex items-center justify-around w-10 h-10">
+      <Badge badgeContent={cartItems} color="primary">
+      <Icon className="lt-text-accent lt-icon-base" onClick={handleClick}>shopping_cart</Icon>
+      </Badge>
+      <Popover
+        open={open}
+        anchorEl={anchorEl}
+        disableScrollLock={true}
+        onClose={handleClose}
+        anchorOrigin={{
+          vertical: 'bottom',
+          horizontal: 'center',
+        }}
+        transformOrigin={{
+          vertical: 'top',
+          horizontal: 'center',
+        }}
+      >
+        <ShoppingCartMenu/>
+      </Popover>
+    </div>
+  );
+  const wishList = (
+    <div className="flex items-center justify-around w-10 h-10">
+      <Icon style={{ color: '#fc466b' }} className="lt-text-accent lt-icon-base">favorite</Icon>
+    </div>
+  )
   const logout = () => {
     handleClose();
     logoutUser();
@@ -55,11 +77,9 @@ const DrawerNav = ({ auth: { isAuthenticated, isLoading }, logoutUser }) => {
     </>
   );
   const guestLinks = (
-    <>
-      <MenuItem onClick={handleClose}>
-        <Link to="/auth/login">Login</Link>
-      </MenuItem>
-    </>
+    <div className="lt-bg-primary right-drawer h-screen">
+      {isRegistered ? <Login/> : <Login/>}
+    </div>
   );
   const [drawerState, setState] = React.useState(false);
   const { state, dispatch } = useContext(AppContext)
@@ -113,6 +133,9 @@ const DrawerNav = ({ auth: { isAuthenticated, isLoading }, logoutUser }) => {
       </List>
     </div>
   );
+  useEffect(() => {
+    getCartItems();
+  }, [cart]);
   return (
     <div className="fixed w-full lt-header-mobile top-0 flex justify-between items-center lt-bg-primary p-4 z-10">
       <div className="flex items-center" onClick={toggleDrawer(true)}>
@@ -122,52 +145,13 @@ const DrawerNav = ({ auth: { isAuthenticated, isLoading }, logoutUser }) => {
           </div>
       </div>
       <div className="flex items-center">
-        <div
-          className="flex items-center justify-around ml-4"
-          onClick={handleLanguageMenu}
-        >
-          <Icon className="lt-text-accent lt-icon-base">translate</Icon>
-          <span className="font-semibold lt-text-accent">{state.locale}</span>
-          <Icon className="lt-text-accent lt-icon-base">keyboard_arrow_down</Icon>
-        </div>
-        <Menu
-          disableScrollLock={true}
-          anchorEl={langEl}
-          keepMounted
-          open={Boolean(langEl)}
-          onClose={handleLangClose}
-          getContentAnchorEl={null}
-          anchorOrigin={{ vertical: "bottom", horizontal: "left" }}
-          transformOrigin={{ vertical: "top", horizontal: "center" }}
-        >
-          <MenuItem disabled={state.locale === LOCALES.ENGLISH} onClick={() => handleLanguage(LOCALES.ENGLISH)}>English</MenuItem>
-          <MenuItem disabled={state.locale === LOCALES.HINDI} onClick={() => handleLanguage(LOCALES.HINDI)}>Hindi</MenuItem>
-          {/* <MenuItem disabled={state.locale === LOCALES.SPANISH} onClick={() => handleLanguage(LOCALES.SPANISH)}>Spanish</MenuItem> */}
-        </Menu>
-        {!isLoading && <div>{isAuthenticated && authBag}</div>}
-
-        {/* <div className="flex items-center justify-around w-12 h-12">
-          <Icon className="lt-text-accent lt-icon-base">shopping_cart</Icon>
-        </div> */}
+        {!isLoading && <>{isAuthenticated &&  wishList}</>}
+        {!isLoading && <>{isAuthenticated && authBag}</>}
         <div
           className="flex items-center justify-around w-12 h-12"
-          onClick={handleClick}
         >
           <Icon className="lt-text-accent lt-icon-md">account_circle</Icon>
         </div>
-        <Menu
-          disableScrollLock={true}
-          anchorEl={anchorEl}
-          keepMounted
-          open={Boolean(anchorEl)}
-          getContentAnchorEl={null}
-          anchorOrigin={{ vertical: "bottom", horizontal: "left" }}
-          transformOrigin={{ vertical: "top", horizontal: "center" }}
-          onClose={handleClose}
-        >
-          {!isLoading && <div>{isAuthenticated ? authLinks : guestLinks}</div>}
-
-        </Menu>
       </div>
       <Drawer
         disableScrollLock={true}
@@ -195,5 +179,6 @@ DrawerNav.propTypes = {
 
 const mapStateToProps = (state) => ({
   auth: state.auth,
+  shop: state.shop
 });
 export default connect(mapStateToProps, { logoutUser })(DrawerNav);
