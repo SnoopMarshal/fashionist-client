@@ -40,7 +40,7 @@ const ShoppingCartMenu = ({ shop: { cart } }) => {
             </div>
           ))}
           </div>
-          <div className="w-full flex justify-center items-center bg-white absolute bottom-0 py-2 border-t border-gray-400 cursor-pointer">GO TO CART</div>
+          <div className="w-full flex justify-center items-center bg-white absolute bottom-0 py-2 border-t border-gray-400 cursor-pointer font-semibold">GO TO CART</div>
         </div>
       ) : (
         <div className="w-full h-full flex justify-center items-center">

@@ -6,6 +6,7 @@ const initialState = {
     cart: []
 }
 export default function( state = initialState, action) {
+    console.log(state)
     switch (action.type) {
         case ADD_TO_WISHLIST:
             const witem = action.payload;
