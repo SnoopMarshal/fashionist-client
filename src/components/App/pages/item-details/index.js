@@ -13,7 +13,7 @@ import Lottie from 'react-lottie';
 import * as woohoo from './../../../../assets/lottie/woohoo.json';
 
 
-const ItemDetails = ({ auth: { isAuthenticated, isLoading, isRegistered }, setWishList, setCart, shop: { wishlist, cart } }) => {
+const ItemDetails = ({ auth: { isAuthenticated }, setWishList, setCart, shop: { wishlist, cart } }) => {
     const defaultOptions = {
         loop: false,
         autoplay: true,
@@ -80,7 +80,10 @@ const ItemDetails = ({ auth: { isAuthenticated, isLoading, isRegistered }, setWi
                         <button className="rounded-md buy-now-button border flex items-center justify-center px-4 py-2 uppercase mr-2">go to cart</button>
                     </div> :
                     <div className="flex items-center justify-end">
-                        <button className="rounded-md buy-now-button border flex items-center justify-center px-4 py-2 uppercase mr-2">buy now</button>
+                        {
+                            isAuthenticated &&
+                            <button className="rounded-md buy-now-button border flex items-center justify-center px-4 py-2 uppercase mr-2">buy now</button>
+                        }
                         <div className="relative">
                             <div className="w-full flex items-center absolute bottom-10 left-1/3">
                                 {showLottie &&
@@ -91,14 +94,16 @@ const ItemDetails = ({ auth: { isAuthenticated, isLoading, isRegistered }, setWi
                                         }
                                     ]} /></div>}
                             </div>
-                            <button className="rounded-md buy-now-button border flex items-center justify-center px-4 py-2 uppercase" onClick={() => addToCart(item)}>add to cart</button>
+                            {
+                                isAuthenticated && <button className="rounded-md buy-now-button border flex items-center justify-center px-4 py-2 uppercase" onClick={() => addToCart(item)}>add to cart</button>
+                            }
                         </div>
                     </div>
                 }
             </div>
             <div className="w-full md:w-1/2 lg:w-2/3 md:px-4 mt-4 md:mt-0">
                 <div>
-                <span className="text-xl md:text-2xl lg:text-4xl font-bold">{item.name}</span>
+                    <span className="text-xl md:text-2xl lg:text-4xl font-bold">{item.name}</span>
                 </div>
                 <div className="chip-category mt-4">
                     <span className="rounded-full border border-pink-600 text-pink-400 px-2 py-1">{item?.categoryId?.name}</span>
