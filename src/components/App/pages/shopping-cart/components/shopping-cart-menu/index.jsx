@@ -1,11 +1,13 @@
 import React from "react";
 import { connect } from "react-redux";
-import { aws_s3_uri } from "./../../../../../../config";
+import { aws_s3_uri } from "../../../../../../config";
 import "./shopping-cart-menu.css";
+import {deleteFromCart} from './../../../../../../redux/actions/cartAction';
 import Icon from "@material-ui/core/Icon";
-const ShoppingCartMenu = ({ shop: { cart } }) => {
-  const removeItem = (e, item) => {
+const ShoppingCartMenu = ({ shop: { cart }, deleteFromCart}) => {
+  const removeItem = (e, cartItem) => {
     e.stopPropagation();
+    deleteFromCart(cartItem);
   };
   return (
     <div className="cart-content">
@@ -15,19 +17,20 @@ const ShoppingCartMenu = ({ shop: { cart } }) => {
           {cart.map((o) => (
             <div
               className="flex w-full p-2 cart-item cursor-pointer"
-              key={o._id}
+              key={o.item._id}
               onClick={() => {
                 console.log("called");
               }}
             >
               <img
                 className="w-20 h-20"
-                src={aws_s3_uri + "/" + o.thumbnail}
+                src={aws_s3_uri + "/" + o.item.thumbnail}
                 alt=""
               />
               <div className="flex items-start justify-evenly flex-col ml-2 w-full">
-                <span className="font-semibold underline">{o.name}</span>
-                <span className="text-xs">Quantity: 1</span>
+                <span className="font-semibold underline">{o.item.name}</span>
+                <span className="text-xs">Quantity: {o.qty}</span>
+                <span className="text-xs">Price: &#8377; {o.item.price}</span>
                 <div className="w-full flex justify-end">
                   <Icon
                     style={{ fontSize: 22 }}
@@ -53,5 +56,9 @@ const ShoppingCartMenu = ({ shop: { cart } }) => {
 const mapStateToProps = (state) => ({
   shop: state.shop,
 });
-
-export default connect(mapStateToProps)(ShoppingCartMenu);
+const mapDispatchToProps = (dispatch) => {
+  return {
+    deleteFromCart: (item) => {dispatch(deleteFromCart(item))}
+  }
+}
+export default connect(mapStateToProps, mapDispatchToProps)(ShoppingCartMenu);

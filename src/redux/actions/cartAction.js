@@ -16,11 +16,21 @@ export const setCart = item => dispatch => {
             })
         });
 }
-export const deleteFromCart = item => {
-    return {
-        type: DELETE_FROM_CART,
-        payload: item
-    }
+export const deleteFromCart = (cartItem) => dispatch => {
+    cartService.removeItemFromCart(cartItem.item._id).then(
+        res => {
+            dispatch({
+                type: DELETE_FROM_CART,
+                payload: cartItem.item
+            })
+        }
+    ).catch(err => {
+        console.error(err)
+        dispatch({
+            type: GET_ERRORS,
+            payload: err
+        })
+    });
 }
 export const clearCart = () => {
     return {

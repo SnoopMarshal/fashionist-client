@@ -16,7 +16,7 @@ import Badge from '@material-ui/core/Badge';
 import Popover from '@material-ui/core/Popover';
 import './desktop.css';
 import ShoppingCartMenu from "../../pages/shopping-cart/components/shopping-cart-menu";
-const DesktopNav = ({ auth: { isAuthenticated, isLoading, isRegistered }, logoutUser, shop:{cart} }) => {
+const DesktopNav = ({ auth: { isAuthenticated, isLoading, isRegistered }, logoutUser, shop: { cart } }) => {
   const [rightDrawerOpen, setRightDrawer] = useState(false);
   const handleLangClose = () => {
     setLangEl(null);
@@ -27,7 +27,7 @@ const DesktopNav = ({ auth: { isAuthenticated, isLoading, isRegistered }, logout
   // popover
   const [anchorEl, setAnchorEl] = useState(null);
   const [cartItems, setCart] = useState(0);
-
+  const [isRegisterShow, showRegister] = useState(true);
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
   };
@@ -50,14 +50,32 @@ const DesktopNav = ({ auth: { isAuthenticated, isLoading, isRegistered }, logout
     </div>
   );
   const guestLinks = (
-    <div className="lt-bg-primary right-drawer h-screen">
-      {isRegistered ? <Login/> : <Login/>}
+    <div className="lt-bg-primary right-drawer h-screen flex flex-col items-center justify-center">
+      {isRegistered || !isRegisterShow ? <Login /> : <Signup />}
+      {isRegisterShow ? <div className="flex items-center py-2 px-4 w-full">
+      <span>Already have an account?</span>
+
+        <button
+          className="w-full px-4 py-2 lt-bg-accent text-white rounded-md font-semibold"
+          onClick={() => showRegister(false)}
+        >
+          Login
+        </button>
+      </div> : <div className="flex items-center py-2 px-4 w-full">
+      <span>Don't have an account?</span>
+        <button
+          className="w-full px-4 py-2 lt-bg-accent text-white rounded-md font-semibold"
+          onClick={() => showRegister(true)}
+        >
+          Sign Up
+        </button>
+      </div>}
     </div>
   );
   const authBag = (
     <div className="flex items-center justify-around w-16 h-16">
       <Badge badgeContent={cartItems} color="primary">
-      <Icon className="lt-text-accent lt-icon-base" onClick={handleClick}>shopping_cart</Icon>
+        <Icon className="lt-text-accent lt-icon-base" onClick={handleClick}>shopping_cart</Icon>
       </Badge>
       <Popover
         id={id}
@@ -74,7 +92,7 @@ const DesktopNav = ({ auth: { isAuthenticated, isLoading, isRegistered }, logout
           horizontal: 'center',
         }}
       >
-        <ShoppingCartMenu/>
+        <ShoppingCartMenu />
       </Popover>
     </div>
   );
@@ -95,7 +113,7 @@ const DesktopNav = ({ auth: { isAuthenticated, isLoading, isRegistered }, logout
     });
   };
   const { state, dispatch } = useContext(AppContext);
-  const openRightMenu =  (open) => (event) => {
+  const openRightMenu = (open) => (event) => {
     if (event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) {
       return;
     }
@@ -105,7 +123,7 @@ const DesktopNav = ({ auth: { isAuthenticated, isLoading, isRegistered }, logout
   useEffect(() => {
     getCartItems();
   }, [cart]);
-  
+
   return (
     <div className="fixed w-full lt-header top-0 flex justify-between items-center lt-bg-primary z-10">
       <div className="flex items-center justify-between w-full">
@@ -157,8 +175,8 @@ const DesktopNav = ({ auth: { isAuthenticated, isLoading, isRegistered }, logout
           </div>
         </div>
         <div className="flex items-center">
-          {!isLoading && <div>{isAuthenticated &&  wishList}</div>}
-          {!isLoading && <div>{isAuthenticated &&  authBag}</div>}
+          {!isLoading && <div>{isAuthenticated && wishList}</div>}
+          {!isLoading && <div>{isAuthenticated && authBag}</div>}
           <div
             className="flex items-center justify-around w-16 h-16"
             onClick={openRightMenu(true)}
@@ -179,7 +197,7 @@ DesktopNav.propTypes = {
   auth: PropTypes.object.isRequired
 };
 
-const mapStateToProps = (state) => ( {
+const mapStateToProps = (state) => ({
   auth: state.auth,
   shop: state.shop
 });

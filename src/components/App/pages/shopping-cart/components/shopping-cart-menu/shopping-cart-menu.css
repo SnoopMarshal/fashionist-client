@@ -2,6 +2,7 @@
     color: rgb(218, 171, 151);
 }
 .cart-content{
+    position: relative;
     height: 25rem;
     min-width: 15rem;
 }

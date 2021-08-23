@@ -32,7 +32,7 @@ const Login = (props) => {
     return <Redirect to="/" />
   }
   return (
-    <div className="w-full h-full flex justify-center items-center">
+    <div className="w-full flex justify-center items-center">
       <div className="lt-bg-primary rounded-md w-full">
         <div className="flex items-center justify-center h-16 w-full">
           <img src={logo} alt="logo" />
